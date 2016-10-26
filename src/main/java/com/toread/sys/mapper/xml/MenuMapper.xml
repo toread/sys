@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.toread.sys.mapper.MenuMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		 menu_id AS menuId, menu_name AS menuName, menu_icon AS menuIcon, menu_pid AS menuPid, menu_state AS menuState, menu_order AS menuOrder, menu_c_time AS menuCTime, menu_u_time AS menuUTime
+	</sql>
+
+</mapper>

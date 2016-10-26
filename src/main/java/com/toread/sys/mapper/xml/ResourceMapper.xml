@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.toread.sys.mapper.ResourceMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		 res_id AS resId, res_type AS resType, res_name AS resName, res_val AS resVal, res_state AS resState, res_c_time AS resCTime, res_u_time AS resUTime
+	</sql>
+
+	<!-- 查询角色拥有的资源-->
+	<select id="queryRoleResources" resultType="resource">
+        SELECT
+		re.res_id AS resId, re.res_type AS resType, re.res_name AS resName,
+		re.res_val AS resVal, re.res_state AS resState, re.res_c_time AS resCTime,
+		re.res_u_time AS resUTime
+		FROM sys_resource re  LEFT JOIN sys_role_resource rl ON re.res_id = rl.res_id
+		<where>
+            rl.role_id = #{roleId} AND re.res_state = #{state}
+		</where>
+	</select>
+</mapper>
