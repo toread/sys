@@ -6,6 +6,8 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.toread.sys.common.tree.annotation.TreeId;
+import com.toread.sys.common.tree.annotation.TreePid;
 
 /**
  *
@@ -20,10 +22,12 @@ public class Department implements Serializable {
 
 	/** 部门主键 */
 	@TableId(value = "dpt_id")
+	@TreeId
 	private Long dptId;
 
 	/** 父部门id */
 	@TableField(value = "dpt_pid")
+	@TreePid
 	private Long dptPid;
 
 	/** 部门名称 */
