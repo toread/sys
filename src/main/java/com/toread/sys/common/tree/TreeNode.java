@@ -15,4 +15,5 @@ public interface TreeNode<T> {
     void setFather(TreeNode<T> t);
     TreeNode  getFather();
     List<TreeNode<T>> getChildes();
+    Boolean isLeaf();
 }

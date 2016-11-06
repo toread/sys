@@ -6,7 +6,6 @@ import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -77,5 +76,10 @@ public class SimpleTreeNode<T> implements TreeNode<T> {
     @Override
     public List<TreeNode<T>> getChildes() {
         return this.childesNode;
+    }
+
+    @Override
+    public Boolean isLeaf() {
+        return CollectionUtils.isEmpty(childesNode);
     }
 }
