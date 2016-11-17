@@ -25,18 +25,22 @@ public class SimpleTreeTest {
         Department department = new Department();
         department.setDptId(1L);
         department.setDptPid(0L);
+        department.setDptName("市委");
 
         Department child1 = new Department();
         child1.setDptId(2L);
         child1.setDptPid(1L);
+        child1.setDptName("办公室");
 
         Department child11 = new Department();
         child11.setDptId(3l);
         child11.setDptPid(1L);
+        child11.setDptName("秘书组");
 
         Department child22 = new Department();
         child22.setDptId(4L);
         child22.setDptPid(2L);
+        child22.setDptName("监理秘书");
 
         departments.add(department);
         departments.add(child1);
@@ -79,6 +83,12 @@ public class SimpleTreeTest {
     @Test
     public void getCollection() throws Exception {
         assertTrue(departmentTree.getTreeData().size() == 4);
+    }
+
+    @Test
+    public void getPath(){
+        TreeNode<Department> t3 = departmentTree.getRoot().getChildes().get(0).getChildes().get(0);
+        System.out.print(t3.treePath());
     }
 
 }

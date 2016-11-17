@@ -2,10 +2,13 @@ package com.toread.sys.common.tree;
 
 import com.toread.sys.common.tree.annotation.TreeId;
 import com.toread.sys.common.tree.annotation.TreePid;
+import com.toread.sys.common.tree.annotation.TreeText;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -81,5 +84,20 @@ public class SimpleTreeNode<T> implements TreeNode<T> {
     @Override
     public Boolean isLeaf() {
         return CollectionUtils.isEmpty(childesNode);
+    }
+
+    @Override
+    public String treePath() {
+        ArrayList list = new ArrayList();
+        String thisNodeText = TreeUtils.getAnnotationFieldValues(this.getData(), TreeText.class).toString();
+        list.add(thisNodeText);
+        TreeNode<T> father = this.getFather();
+        while (father!=null){
+            list.add(TreeUtils.getAnnotationFieldValues(father.getData(), TreeText.class).toString());
+            father = father.getFather();
+        }
+        //处理数据结构
+        Collections.reverse(list);
+        return StringUtils.arrayToDelimitedString(list.toArray(),"/");
     }
 }

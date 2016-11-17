@@ -16,4 +16,5 @@ public interface TreeNode<T> {
     TreeNode  getFather();
     List<TreeNode<T>> getChildes();
     Boolean isLeaf();
+    String treePath();
 }

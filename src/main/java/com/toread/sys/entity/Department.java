@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.toread.sys.common.tree.annotation.TreeId;
 import com.toread.sys.common.tree.annotation.TreePid;
+import com.toread.sys.common.tree.annotation.TreeText;
 
 /**
  *
@@ -32,6 +33,7 @@ public class Department implements Serializable {
 
 	/** 部门名称 */
 	@TableField(value = "dpt_name")
+	@TreeText
 	private String dptName;
 
 	/** 部门类型 */
