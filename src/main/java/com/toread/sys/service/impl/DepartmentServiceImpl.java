@@ -1,11 +1,21 @@
 package com.toread.sys.service.impl;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.toread.sys.common.tree.SimpleTree;
+import com.toread.sys.common.tree.Tree;
+import com.toread.sys.common.tree.TreeNode;
+import com.toread.sys.common.tree.TreeUtils;
+import com.toread.sys.config.CacheConfig;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Service;
 
 import com.toread.sys.mapper.DepartmentMapper;
 import com.toread.sys.entity.Department;
 import com.toread.sys.service.IDepartmentService;
 import com.baomidou.framework.service.impl.SuperServiceImpl;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -16,14 +26,33 @@ import java.util.List;
 @Service
 public class DepartmentServiceImpl extends SuperServiceImpl<DepartmentMapper, Department> implements IDepartmentService {
 
+    @Autowired
+    private CacheManager cacheManager;
 
     @Override
-    public List<Department> findChildes(String depId) {
-        return null;
+    public List<Department> findChildes(Long depId) {
+        Department treeNode = new Department();
+        treeNode.setDptId(depId);
+        TreeNode<Department> departmentTreeNode = buildDepartmentTree().findTreeNode(treeNode);
+        return CollectionUtils.arrayToList(TreeUtils.getTreeChildesData(departmentTreeNode).toArray());
     }
 
     @Override
-    public Department findFather(String depId) {
-        return null;
+    public Department findFather(Long depId) {
+        Department treeNode = new Department();
+        treeNode.setDptId(depId);
+        return (Department) buildDepartmentTree().findTreeNode(treeNode).getFather().getData();
+    }
+
+    @Override
+    public Tree<Department> buildDepartmentTree() {
+        Cache cache = cacheManager.getCache(CacheConfig.CTL_TREE_CHCHE);
+        Tree<Department> departmentTree = (Tree<Department>)cache.get(IDepartmentService.TREE_KEY);
+        if(departmentTree == null){
+            departmentTree = new SimpleTree<Department>();
+            departmentTree.buildTree(this.selectList(new EntityWrapper<Department>()),1L);
+            cache.put(IDepartmentService.TREE_KEY,departmentTree);
+        }
+        return departmentTree;
     }
 }

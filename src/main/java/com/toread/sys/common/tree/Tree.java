@@ -1,5 +1,7 @@
 package com.toread.sys.common.tree;
 
+import com.toread.sys.entity.Department;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -43,4 +45,5 @@ public interface Tree<T> {
      * @return
      */
     List<T> getTreeData();
+
 }
