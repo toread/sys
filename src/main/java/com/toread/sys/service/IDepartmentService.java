@@ -16,6 +16,19 @@ public interface IDepartmentService extends ISuperService<Department> {
     String TREE_KEY = "department_tree";
 
     /**
+     * 增加机构
+     * @param department
+     * @return
+     */
+    boolean addDepartment(Department department);
+
+    /**
+     * 删除机构
+     * @param department
+     * @return
+     */
+    boolean deleteDepartment(Department department);
+    /**
      * 获取节点部门
      * @param depId
      * @return
@@ -33,5 +46,5 @@ public interface IDepartmentService extends ISuperService<Department> {
     /**
      * 构建机构树
      */
-    public Tree<Department> buildDepartmentTree();
+    Tree<Department> buildDepartmentTree();
 }

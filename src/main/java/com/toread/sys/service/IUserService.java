@@ -9,6 +9,24 @@ import com.baomidou.framework.service.ISuperService;
  *
  */
 public interface IUserService extends ISuperService<User> {
+    /**
+     * 增加用户
+     * @param user
+     * @param departmentId
+     */
+    void addUser(User user,Long departmentId);
 
+    /**
+     * 删除用户
+     * @param user
+     * @param departmentId
+     */
+    void deleteUser(User user,Long departmentId);
 
+    /**
+     *
+     * @param user
+     * @return
+     */
+    boolean userLogin(User user);
 }

@@ -15,6 +15,7 @@ import com.toread.sys.mapper.DepartmentMapper;
 import com.toread.sys.entity.Department;
 import com.toread.sys.service.IDepartmentService;
 import com.baomidou.framework.service.impl.SuperServiceImpl;
+import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
@@ -30,7 +31,20 @@ public class DepartmentServiceImpl extends SuperServiceImpl<DepartmentMapper, De
     private CacheManager cacheManager;
 
     @Override
+    public boolean addDepartment(Department department) {
+        Assert.notNull(findFather(department.getDptPid()),String.format("未找到%s节点",department.getDptId()));
+        return insert(department);
+    }
+
+    @Override
+    public boolean deleteDepartment(Department department) {
+        Assert.notNull(findFather(department.getDptPid()),String.format("未找到%s节点",department.getDptId()));
+        return false;
+    }
+
+    @Override
     public List<Department> findChildes(Long depId) {
+        Assert.notNull(depId,"节点ID不能为空");
         Department treeNode = new Department();
         treeNode.setDptId(depId);
         TreeNode<Department> departmentTreeNode = buildDepartmentTree().findTreeNode(treeNode);
@@ -39,6 +53,7 @@ public class DepartmentServiceImpl extends SuperServiceImpl<DepartmentMapper, De
 
     @Override
     public Department findFather(Long depId) {
+        Assert.notNull(depId,"节点ID不能为空");
         Department treeNode = new Department();
         treeNode.setDptId(depId);
         return (Department) buildDepartmentTree().findTreeNode(treeNode).getFather().getData();
@@ -54,5 +69,10 @@ public class DepartmentServiceImpl extends SuperServiceImpl<DepartmentMapper, De
             cache.put(IDepartmentService.TREE_KEY,departmentTree);
         }
         return departmentTree;
+    }
+
+    private void clearTreeDepartmentCache(){
+        Cache cache = cacheManager.getCache(CacheConfig.CTL_TREE_CHCHE);
+        cache.evict(IDepartmentService.TREE_KEY);
     }
 }

@@ -21,7 +21,6 @@ import static org.junit.Assert.*;
  * @author toread
  */
 public class DepartmentServiceImplTest  extends AccessCtlApplicationTests {
-    private Department department;
     private Department child1;
     private Department child11;
     private Department child22;

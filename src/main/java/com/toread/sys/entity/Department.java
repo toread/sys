@@ -40,6 +40,12 @@ public class Department implements Serializable {
 	@TableField(value = "dpt_type")
 	private String dptType;
 
+	public Department(Long dptId) {
+		this.dptId = dptId;
+	}
+
+	public Department() {
+	}
 
 	public Long getDptId() {
 		return this.dptId;
