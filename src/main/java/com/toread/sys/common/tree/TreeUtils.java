@@ -22,6 +22,26 @@ public abstract class TreeUtils {
      * @return
      */
      public  static <T> Object getAnnotationFieldValues(T t, Class annotationClass){
+         Field[] fields = getFields((T) t, annotationClass);
+        BeanWrapper beanWrapper = new BeanWrapperImpl(t);
+        Object id = beanWrapper.getPropertyValue(fields[0].getName());
+        return id;
+    }
+
+    /**
+     * 设置含有该注释属性的值
+     * @param t
+     * @param annotationClass
+     * @param propertyValue
+     * @param <T>
+     */
+    public  static <T> void setAnnotationFieldValue(T t, Class annotationClass,Object propertyValue){
+        Field[] fields = getFields(t, annotationClass);
+        BeanWrapper beanWrapper = new BeanWrapperImpl(t);
+        beanWrapper.setPropertyValue(fields[0].getName(),propertyValue);
+    }
+
+    private static <T> Field[] getFields(T t, Class annotationClass) {
         Field[]  fields = FieldUtils.getFieldsWithAnnotation(t.getClass(),annotationClass);
         if(fields.length==0){
             String  errorMsg = String.format("未找%s字段中标记%s注解",t.getClass().getName(),annotationClass.getName());
@@ -30,10 +50,9 @@ public abstract class TreeUtils {
             String errorMsg = String.format("只语序%s字段标记一个%s注解",t.getClass().getName(),annotationClass.getName());
             throw  new TreeException(errorMsg);
         }
-        BeanWrapper beanWrapper = new BeanWrapperImpl(t);
-        Object id = beanWrapper.getPropertyValue(fields[0].getName());
-        return id;
+        return fields;
     }
+
 
     /**
      * 获取节点下的所有数据

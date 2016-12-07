@@ -16,8 +16,7 @@ import com.toread.sys.common.tree.annotation.TreeText;
  *
  */
 @TableName("sys_department")
-public class Department implements Serializable {
-
+public class Department implements Serializable  {
 	@TableField(exist = false)
 	private static final long serialVersionUID = 1L;
 

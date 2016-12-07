@@ -1,5 +1,7 @@
 package com.toread.sys.service;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.toread.sys.entity.User;
 import com.baomidou.framework.service.ISuperService;
 
@@ -29,4 +31,12 @@ public interface IUserService extends ISuperService<User> {
      * @return
      */
     boolean userLogin(User user);
+
+    /**
+     * 查询用户信息
+     * @param user
+     * @return
+     */
+    Page<User> queryUsers(Page<User> page,User user);
+
 }

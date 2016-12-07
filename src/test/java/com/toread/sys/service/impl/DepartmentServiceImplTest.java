@@ -30,7 +30,7 @@ public class DepartmentServiceImplTest  extends AccessCtlApplicationTests {
 
     @Test
     public void buildDepartmentTree() throws Exception {
-        Tree<Department> departmentTree =  departmentService.buildDepartmentTree();
+        Tree<Department> departmentTree =  departmentService.buildTree();
         assertNotNull(departmentTree);
     }
 

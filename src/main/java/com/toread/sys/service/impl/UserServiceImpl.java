@@ -1,10 +1,13 @@
 package com.toread.sys.service.impl;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.toread.sys.common.tree.TreeNode;
 import com.toread.sys.entity.Department;
 import com.toread.sys.entity.UserDepartment;
 import com.toread.sys.service.IDepartmentService;
 import com.toread.sys.service.IUserDepartmentService;
+import org.apache.commons.codec.Encoder;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +36,7 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
     @Override
     @Transactional
     public void addUser(User user, Long departmentId) {
-        TreeNode<Department> tTreeNode =  departmentService.buildDepartmentTree().findTreeNode(new Department(departmentId));
+        TreeNode<Department> tTreeNode =  departmentService.buildTree().findTreeNode(new Department(departmentId));
         Assert.notNull(tTreeNode,"机构不存在");
         Assert.isNull(queryByUserCode(user),String.format("用户s%已存在",user.getUserCode()));
         String pwdSHA256 = DigestUtils.sha256Hex(user.getUserPwd());
@@ -63,7 +66,20 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
         Assert.notNull(user,"用戶不能为空");
         Assert.notNull(user.getUserCode(),"手机号码不能为空");
         Assert.notNull(user.getUserPwd(),"手机号码不能为空");
-        //加密用户树
-        return false;
+        String pwdSHA256 = DigestUtils.sha256Hex(user.getUserPwd());
+        User query = new User();
+        user.setUserCode(user.getUserCode());
+        User fromDB = selectOne(query);
+        Assert.notNull(fromDB,"用户未注册");
+        Assert.isTrue(pwdSHA256.equals(fromDB.getUserPwd()),"密码错误");
+        return true;
+    }
+
+
+    @Override
+    public Page<User> queryUsers(Page<User> page,User user) {
+        EntityWrapper<User>  entityWrapper = new EntityWrapper<>();
+        entityWrapper.like("userCode",user.getUserCode());
+        return selectPage(page,entityWrapper);
     }
 }

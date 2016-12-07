@@ -5,6 +5,8 @@ import com.toread.sys.common.tree.SimpleTree;
 import com.toread.sys.common.tree.Tree;
 import com.toread.sys.common.tree.TreeNode;
 import com.toread.sys.common.tree.TreeUtils;
+import com.toread.sys.common.tree.service.SimpleTreeService;
+import com.toread.sys.common.tree.service.SimpleTreeServiceImpl;
 import com.toread.sys.config.CacheConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
@@ -25,54 +27,28 @@ import java.util.List;
  * Department 表数据服务层接口实现类
  */
 @Service
-public class DepartmentServiceImpl extends SuperServiceImpl<DepartmentMapper, Department> implements IDepartmentService {
+public class DepartmentServiceImpl extends SimpleTreeServiceImpl<DepartmentMapper, Department> implements IDepartmentService {
 
     @Autowired
     private CacheManager cacheManager;
 
-    @Override
-    public boolean addDepartment(Department department) {
-        Assert.notNull(findFather(department.getDptPid()),String.format("未找到%s节点",department.getDptId()));
-        return insert(department);
-    }
-
-    @Override
-    public boolean deleteDepartment(Department department) {
-        Assert.notNull(findFather(department.getDptPid()),String.format("未找到%s节点",department.getDptId()));
-        return false;
-    }
-
-    @Override
-    public List<Department> findChildes(Long depId) {
-        Assert.notNull(depId,"节点ID不能为空");
-        Department treeNode = new Department();
-        treeNode.setDptId(depId);
-        TreeNode<Department> departmentTreeNode = buildDepartmentTree().findTreeNode(treeNode);
-        return CollectionUtils.arrayToList(TreeUtils.getTreeChildesData(departmentTreeNode).toArray());
-    }
-
-    @Override
-    public Department findFather(Long depId) {
-        Assert.notNull(depId,"节点ID不能为空");
-        Department treeNode = new Department();
-        treeNode.setDptId(depId);
-        return (Department) buildDepartmentTree().findTreeNode(treeNode).getFather().getData();
-    }
-
-    @Override
-    public Tree<Department> buildDepartmentTree() {
-        Cache cache = cacheManager.getCache(CacheConfig.CTL_TREE_CHCHE);
-        Tree<Department> departmentTree = (Tree<Department>)cache.get(IDepartmentService.TREE_KEY);
-        if(departmentTree == null){
-            departmentTree = new SimpleTree<Department>();
-            departmentTree.buildTree(this.selectList(new EntityWrapper<Department>()),1L);
-            cache.put(IDepartmentService.TREE_KEY,departmentTree);
-        }
-        return departmentTree;
-    }
-
     private void clearTreeDepartmentCache(){
         Cache cache = cacheManager.getCache(CacheConfig.CTL_TREE_CHCHE);
-        cache.evict(IDepartmentService.TREE_KEY);
+        cache.evict(keyName());
+    }
+
+    @Override
+    public Class<Department> getEntityClass() {
+        return Department.class;
+    }
+
+    @Override
+    protected String keyName() {
+        return IDepartmentService.TREE_KEY;
+    }
+
+    @Override
+    public Object rootId() {
+        return 1L;
     }
 }
