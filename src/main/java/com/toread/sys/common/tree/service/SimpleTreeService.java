@@ -21,6 +21,12 @@ public interface SimpleTreeService<T> extends IService<T, Long> {
      */
     boolean deleteTreeNode(T t);
 
+
+    /**
+     * 删除树节点
+     */
+    boolean updateTreeNode(T t);
+
     /**
      * 构建树结构
      * @return

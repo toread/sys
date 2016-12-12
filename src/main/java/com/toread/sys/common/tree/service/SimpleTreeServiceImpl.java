@@ -31,6 +31,11 @@ public abstract class SimpleTreeServiceImpl<M extends AutoMapper<T>,T> extends S
     protected  abstract String keyName();
     protected  abstract Object rootId();
 
+    protected void clearTreeCache(){
+        Cache cache = cacheManager.getCache(CacheConfig.CTL_TREE_CHCHE);
+        cache.evict(keyName());
+    }
+
     @Override
     public boolean addTreeNode(T t) {
         Object pId = TreeUtils.getAnnotationFieldValues(t, TreePid.class);
@@ -53,11 +58,23 @@ public abstract class SimpleTreeServiceImpl<M extends AutoMapper<T>,T> extends S
     }
 
     @Override
+    public boolean updateTreeNode(T t){
+        Object pId = TreeUtils.getAnnotationFieldValues(t, TreePid.class);
+        Object id = TreeUtils.getAnnotationFieldValues(t, TreeId.class);
+        Assert.notNull(pId,"PID值为空");
+        Assert.notNull(findFather(pId),String.format("未找到%s节点",pId));
+        Assert.notNull(findFather(id),String.format("未找到%s节点",id));
+        clearTreeCache();
+        updateById(t);
+        return  false;
+    }
+
+    @Override
     public boolean deleteTreeNode(T t) {
         Object pId = TreeUtils.getAnnotationFieldValues(t, TreePid.class);
         Object id = TreeUtils.getAnnotationFieldValues(t, TreeId.class);
         Assert.notNull(pId,"PID值为空");
-        Assert.notNull(findFather(pId),String.format("未找到%s节点",id));
+        Assert.notNull(findFather(pId),String.format("未找到%s节点",pId));
         return false;
     }
 
