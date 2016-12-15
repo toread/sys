@@ -9,9 +9,12 @@ import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 @MapperScan("com.toread.sys.mapper")
@@ -24,6 +27,10 @@ public class AccessCtlApplication {
 
 	@Bean
 	public HttpMessageConverter FastJsonHttpMessageConverter(){
-		return new FastJsonHttpMessageConverter();
+		FastJsonHttpMessageConverter  httpMessageConverter =  new  FastJsonHttpMessageConverter();
+		List<MediaType> support = new  ArrayList<MediaType>();
+		support.add(MediaType.APPLICATION_JSON);
+		httpMessageConverter.setSupportedMediaTypes(support);
+		return httpMessageConverter;
 	}
 }

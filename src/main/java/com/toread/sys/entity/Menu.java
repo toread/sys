@@ -7,6 +7,8 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.toread.sys.common.tree.annotation.TreeId;
+import com.toread.sys.common.tree.annotation.TreePid;
 import com.toread.sys.mybatis.annotation.CTime;
 
 /**
@@ -22,6 +24,7 @@ public class Menu implements Serializable {
 
 	/** 菜单主键 */
 	@TableId(value = "menu_id")
+	@TreeId
 	private Long menuId;
 
 	/** 菜单名字 */
@@ -34,6 +37,7 @@ public class Menu implements Serializable {
 
 	/** 菜单主键 */
 	@TableField(value = "menu_pid")
+	@TreePid
 	private Long menuPid;
 
 	/** 状态 */

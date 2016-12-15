@@ -5,6 +5,7 @@ import com.toread.sys.service.IMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -12,7 +13,8 @@ import java.util.List;
 /**
  * @author toread
  */
-@RestController("/menu")
+@RestController
+@RequestMapping(path = "/menu")
 public class MenuController {
 
     @Autowired
@@ -23,7 +25,7 @@ public class MenuController {
      * @param menu
      * @return
      */
-    @RequestMapping(method = {RequestMethod.POST})
+    @RequestMapping(method = {RequestMethod.POST},value = "add")
     public Boolean addMenu(Menu menu){
         return menuService.addTreeNode(menu);
     }
@@ -33,6 +35,7 @@ public class MenuController {
      * @param menu
      * @return
      */
+    @RequestMapping(method = {RequestMethod.POST},value = "delete")
     public Boolean deleteMenu(Menu menu){
         return  menuService.deleteTreeNode(menu);
     }
@@ -42,6 +45,7 @@ public class MenuController {
      * @param menu
      * @return
      */
+    @RequestMapping(method = {RequestMethod.POST},value = "update")
     public Boolean updateMenu(Menu menu){
         return menuService.updateTreeNode(menu);
     }
@@ -51,7 +55,8 @@ public class MenuController {
      * @param menuPid
      * @return
      */
-    public List<Menu> getChildes(Long menuPid){
+    @RequestMapping(method = {RequestMethod.POST},path = "getChildes")
+    public List<Menu> getChildes(@RequestParam("pid") Long menuPid){
         return menuService.findChildes(menuPid);
     }
 }

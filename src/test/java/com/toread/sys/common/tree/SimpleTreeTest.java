@@ -1,12 +1,13 @@
 package com.toread.sys.common.tree;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.toread.sys.entity.Department;
+import com.toread.sys.entity.Menu;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -91,4 +92,16 @@ public class SimpleTreeTest {
         System.out.print(t3.treePath());
     }
 
+
+    @Test
+    public void  testJson(){
+        Menu menu = new Menu();
+        menu.setMenuCTime(new Date());
+        menu.setMenuId(11L);
+        Map<String,Object> mps = new HashMap<>(2);
+        mps.put("logType","请求参数");
+        mps.put("val",menu);
+        JSONObject jsonObject = new JSONObject(mps);
+        System.out.println(JSON.toJSONString(jsonObject));
+    }
 }
