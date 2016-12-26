@@ -30,6 +30,7 @@ import static org.junit.Assert.*;
 public class MenuControllerTest {
     @Autowired
     private TestRestTemplate restTemplate;
+
     @Test
     public void addMenu() throws Exception {
         List<Menu>  result =  restTemplate.postForObject("/menu/getChildes",1L,List.class);

@@ -1,21 +1,19 @@
 package com.toread.sys.controller;
 
+import com.toread.sys.config.APIRout;
 import com.toread.sys.entity.Department;
 import com.toread.sys.entity.Department;
 import com.toread.sys.service.IDepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * @author toread
  */
 @RestController
-@RequestMapping(path = "/depart")
 public class DepartController {
     @Autowired
     private IDepartmentService departmentService;
@@ -25,8 +23,8 @@ public class DepartController {
      * @param Department
      * @return
      */
-    @RequestMapping(method = {RequestMethod.POST},value = "add")
-    public Boolean addDepartment(Department Department){
+    @RequestMapping(method = {RequestMethod.POST},value = APIRout.DeptAPI.ADD)
+    public Boolean addDepartment(@RequestBody Department Department){
         return departmentService.addTreeNode(Department);
     }
 
@@ -35,8 +33,8 @@ public class DepartController {
      * @param Department
      * @return
      */
-    @RequestMapping(method = {RequestMethod.POST},value = "delete")
-    public Boolean deleteDepartment(Department Department){
+    @RequestMapping(method = {RequestMethod.DELETE},value = APIRout.DeptAPI.DELETE)
+    public Boolean deleteDepartment(@RequestBody Department Department){
         return  departmentService.deleteTreeNode(Department);
     }
 
@@ -45,18 +43,18 @@ public class DepartController {
      * @param Department
      * @return
      */
-    @RequestMapping(method = {RequestMethod.POST},value = "update")
-    public Boolean updateDepartment(Department Department){
+    @RequestMapping(method = {RequestMethod.PUT},value = APIRout.DeptAPI.UPDATE)
+    public Boolean updateDepartment(@RequestBody Department Department){
         return departmentService.updateTreeNode(Department);
     }
 
     /**
      * 获取子节点
-     * @param DepartmentPid
+     * @param departmentPid
      * @return
      */
-    @RequestMapping(method = {RequestMethod.POST},path = "getChildes")
-    public List<Department> getChildes(@RequestParam("pid") Long DepartmentPid){
-        return departmentService.findChildes(DepartmentPid);
+    @RequestMapping(method = {RequestMethod.POST},value = APIRout.DeptAPI.CHILDES)
+    public List<Department> getChildes(@RequestBody Long departmentPid){
+        return departmentService.findChildes(departmentPid);
     }
 }

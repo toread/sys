@@ -1,0 +1,2 @@
+-- mysql服务安装
+sudo docker run  --restart  always  --name dev-mysql -p3306:3306 -e MYSQL_ROOT_PASSWORD=toread -d mysql

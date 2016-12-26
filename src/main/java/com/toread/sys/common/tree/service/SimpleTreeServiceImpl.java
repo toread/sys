@@ -10,6 +10,7 @@ import com.toread.sys.common.tree.TreeUtils;
 import com.toread.sys.common.tree.annotation.TreeId;
 import com.toread.sys.common.tree.annotation.TreePid;
 import com.toread.sys.config.CacheConfig;
+import com.toread.sys.utils.MonitorUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
@@ -84,7 +85,9 @@ public abstract class SimpleTreeServiceImpl<M extends AutoMapper<T>,T> extends S
         Tree<T> tree = cache.get(keyName(),Tree.class);
         if(tree == null){
             tree = new SimpleTree<T>();
+            Long begin = MonitorUtils.timeNow();
             tree.buildTree(this.selectList(new EntityWrapper<T>()),rootId());
+            MonitorUtils.idleLogger(begin);
             cache.put(keyName(),tree);
         }
         return  tree;

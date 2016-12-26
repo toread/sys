@@ -2,10 +2,14 @@ package com.toread.sys.common.tree;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.toread.sys.AccessCtlApplication;
 import com.toread.sys.entity.Department;
 import com.toread.sys.entity.Menu;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.*;
 
@@ -90,18 +94,5 @@ public class SimpleTreeTest {
     public void getPath(){
         TreeNode<Department> t3 = departmentTree.getRoot().getChildes().get(0).getChildes().get(0);
         System.out.print(t3.treePath());
-    }
-
-
-    @Test
-    public void  testJson(){
-        Menu menu = new Menu();
-        menu.setMenuCTime(new Date());
-        menu.setMenuId(11L);
-        Map<String,Object> mps = new HashMap<>(2);
-        mps.put("logType","请求参数");
-        mps.put("val",menu);
-        JSONObject jsonObject = new JSONObject(mps);
-        System.out.println(JSON.toJSONString(jsonObject));
     }
 }

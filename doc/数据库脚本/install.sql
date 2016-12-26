@@ -1,3 +1,6 @@
+CREATE  DATABASE  access_ctl DEFAULT  CHAR SET   utf8 COLLATE utf8_general_ci;
+
+use mysql;
 CREATE TABLE sys_department
 (
     dpt_id BIGINT(20) PRIMARY KEY NOT NULL COMMENT '部门主键',

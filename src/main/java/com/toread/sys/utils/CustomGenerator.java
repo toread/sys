@@ -10,12 +10,6 @@ import java.io.IOException;
  * Created by toread on 16-10-19.
  */
 public class CustomGenerator {
-    public static void main(String[] args) throws IOException {
-        generator();
-    }
-
-
-
     public static void generator(){
         ConfigGenerator cg = new ConfigGenerator();
         // 配置 MySQL 连接

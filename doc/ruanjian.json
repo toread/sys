@@ -1,0 +1,13 @@
+input {
+  stdin { }
+  log4j {
+    mode => "server"
+    port => 5678
+    type => "log4j"
+  }
+}
+output {
+  elasticsearch {
+    hosts => [ "localhost:9200" ]
+  }
+}
