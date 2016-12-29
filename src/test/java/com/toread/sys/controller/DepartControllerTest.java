@@ -31,7 +31,8 @@ public class DepartControllerTest {
 
     @Test
     public void getChildes() throws Exception {
-        List<Department> st = template.postForObject("/depart/childes",1L, List.class);
-        Assert.isTrue(!CollectionUtils.isEmpty(st));
+        RestTemplate restTemplate = new RestTemplate();
+        List<Department> xxx = restTemplate.postForObject("http://localhost:8081/depart/childes",1L, List.class);
+        Assert.isTrue(!CollectionUtils.isEmpty(xxx));
     }
 }
