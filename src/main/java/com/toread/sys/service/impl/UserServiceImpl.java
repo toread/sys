@@ -7,6 +7,7 @@ import com.toread.sys.entity.Department;
 import com.toread.sys.entity.UserDepartment;
 import com.toread.sys.service.IDepartmentService;
 import com.toread.sys.service.IUserDepartmentService;
+import com.toread.sys.utils.FormatUtils;
 import org.apache.commons.codec.Encoder;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
     public void addUser(User user, Long departmentId) {
         TreeNode<Department> tTreeNode =  departmentService.buildTree().findTreeNode(new Department(departmentId));
         Assert.notNull(tTreeNode,"机构不存在");
-        Assert.isNull(queryByUserCode(user),String.format("用户s%已存在",user.getUserCode()));
+        Assert.isNull(queryByUserCode(user), FormatUtils.format("用户{0}已存在",user.getUserCode()));
         String pwdSHA256 = DigestUtils.sha256Hex(user.getUserPwd());
         user.setUserPwd(pwdSHA256);
         insert(user);
