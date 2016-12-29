@@ -31,7 +31,7 @@ public class DepartControllerTest {
 
     @Test
     public void getChildes() throws Exception {
-        List<Department> st = template.postForObject("/depart/getChildes",1L, List.class);
+        List<Department> st = template.postForObject("/depart/childes",1L, List.class);
         Assert.isTrue(!CollectionUtils.isEmpty(st));
     }
 }

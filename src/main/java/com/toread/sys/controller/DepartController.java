@@ -1,9 +1,12 @@
 package com.toread.sys.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.toread.sys.config.APIRout;
 import com.toread.sys.entity.Department;
 import com.toread.sys.entity.Department;
 import com.toread.sys.service.IDepartmentService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +18,8 @@ import java.util.concurrent.ExecutionException;
  */
 @RestController
 public class DepartController {
+    private static final Logger log = LoggerFactory.getLogger(DepartController.class);
+
     @Autowired
     private IDepartmentService departmentService;
 
