@@ -64,6 +64,12 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<!-- 验证配置 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<!-- 缓存配置 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-cache</artifactId>

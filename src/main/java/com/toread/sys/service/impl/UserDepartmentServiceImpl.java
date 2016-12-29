@@ -21,7 +21,7 @@ public class UserDepartmentServiceImpl extends SuperServiceImpl<UserDepartmentMa
     public boolean bindUser(Long userId, Long dptId) {
         Assert.notNull(userId);Assert.notNull(dptId);
         UserDepartment userDepartment = new UserDepartment();
-        userDepartment.setId(userId);
+        userDepartment.setUserId(userId);
         userDepartment.setDptId(dptId);
         Assert.isNull(selectOne(userDepartment),"已经绑定过此部门下");
         return insert(userDepartment);
