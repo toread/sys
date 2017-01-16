@@ -1,73 +1,106 @@
 package com.toread.sys.entity;
 
-import java.io.Serializable;
+import com.toread.sys.common.mybatis.annotation.IDSequence;
+
 import java.util.Date;
+import javax.persistence.*;
 
+@Table(name = "sys_user_department")
+public class UserDepartment {
+    /**
+     * 用户部门id
+     */
+    @Id
+    @IDSequence
+    private Long id;
 
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableName;
-import com.toread.sys.mybatis.annotation.CTime;
+    /**
+     * 用户id
+     */
+    @Column(name = "user_id")
+    private Long userId;
 
-/**
- *
- * 
- *
- */
-@TableName("sys_user_department")
-public class UserDepartment implements Serializable {
+    /**
+     * 部门id
+     */
+    @Column(name = "dpt_id")
+    private Long dptId;
 
-	@TableField(exist = false)
-	private static final long serialVersionUID = 1L;
+    /**
+     * 创建时间
+     */
+    @Column(name = "c_time")
+    private Date cTime;
 
-	/** 用户部门id */
-	@TableId
-	private Long id;
+    /**
+     * 获取用户部门id
+     *
+     * @return id - 用户部门id
+     */
+    public Long getId() {
+        return id;
+    }
 
-	/** 用户id */
-	@TableField(value = "user_id")
-	private Long userId;
+    /**
+     * 设置用户部门id
+     *
+     * @param id 用户部门id
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	/** 部门id */
-	@TableField(value = "dpt_id")
-	private Long dptId;
+    /**
+     * 获取用户id
+     *
+     * @return user_id - 用户id
+     */
+    public Long getUserId() {
+        return userId;
+    }
 
-	/** 创建时间 */
-	@TableField(value = "c_time")
-	@CTime
-	private Date cTime;
+    /**
+     * 设置用户id
+     *
+     * @param userId 用户id
+     */
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
+    /**
+     * 获取部门id
+     *
+     * @return dpt_id - 部门id
+     */
+    public Long getDptId() {
+        return dptId;
+    }
 
-	public Long getId() {
-		return this.id;
-	}
+    /**
+     * 设置部门id
+     *
+     * @param dptId 部门id
+     */
+    public void setDptId(Long dptId) {
+        this.dptId = dptId;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    /**
+     * 获取创建时间
+     *
+     * @return c_time - 创建时间
+     */
+    public Date getcTime() {
+        return cTime;
+    }
 
-	public Long getUserId() {
-		return this.userId;
-	}
-
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
-
-	public Long getDptId() {
-		return this.dptId;
-	}
-
-	public void setDptId(Long dptId) {
-		this.dptId = dptId;
-	}
-
-	public Date getCTime() {
-		return this.cTime;
-	}
-
-	public void setCTime(Date cTime) {
-		this.cTime = cTime;
-	}
-
+    /**
+     * 设置创建时间
+     *
+     * @param cTime 创建时间
+     */
+    public void setcTime(Date cTime) {
+        this.cTime = cTime;
+    }
 }

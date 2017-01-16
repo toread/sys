@@ -42,7 +42,7 @@
     </appender>
 
     <logger name="com.toread.sys.mapper"  level="TRACE" />
-
+    <logger name="com.toread.sys.common.tree"  level="DEBUG" />
     <!-- 日志输出级别 -->
     <root level="INFO">
         <appender-ref ref="CONSOLE"/>

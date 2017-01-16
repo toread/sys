@@ -8,7 +8,6 @@ import org.springframework.util.Assert;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 
 /**
  * @author toread
@@ -23,9 +22,9 @@ public abstract class TreeUtils {
      */
      public  static <T> Object getAnnotationFieldValues(T t, Class annotationClass){
          Field[] fields = getFields((T) t, annotationClass);
-        BeanWrapper beanWrapper = new BeanWrapperImpl(t);
-        Object id = beanWrapper.getPropertyValue(fields[0].getName());
-        return id;
+         BeanWrapper beanWrapper = new BeanWrapperImpl(t);
+         Object id = beanWrapper.getPropertyValue(fields[0].getName());
+         return id;
     }
 
     /**

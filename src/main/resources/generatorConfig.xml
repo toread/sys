@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="com.toread.sys.common.mybatis.CRUDMapper"/>
+            <!-- caseSensitive默认false，当数据库表名区分大小写时，可以将该属性设置为true -->
+            <property name="caseSensitive" value="true"/>
+        </plugin>
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://100.73.12.50:3306/access_ctl?characterEncoding=utf8"
+                        userId="root"
+                        password="toread">
+        </jdbcConnection>
+        <javaModelGenerator targetPackage="com.toread.sys.entity" targetProject="D:\prj\sys\src\main\java"/>
+        <sqlMapGenerator targetPackage="com.toread.sys.mapper.xml"  targetProject="D:\prj\sys\src\main\java"/>
+        <javaClientGenerator targetPackage="com.toread.sys.mapper" targetProject="D:\prj\sys\src\main\java" type="XMLMAPPER" />
+        <!--<table tableName="sys_department"  domainObjectName="Department"  mapperName="DepartmentMapper" >-->
+            <!--<generatedKey column="dpt_id"  sqlStatement="Mysql" />-->
+        <!--</table>-->
+        <!--<table tableName="sys_user_department"  domainObjectName="UserDepartment"  mapperName="UserDepartmentMapper" >-->
+            <!--<generatedKey column="id"  sqlStatement="Mysql" />-->
+        <!--</table>-->
+
+        <table tableName="sys_menu"  domainObjectName="Menu"  mapperName="MenuMapper" >
+            <generatedKey column="menu_id"  sqlStatement="Mysql" />
+        </table>
+        <table tableName="sys_resouce_menu"  domainObjectName="ResouceMenu"  mapperName="ResouceMenuMapper" >
+            <generatedKey column="id"  sqlStatement="Mysql" />
+        </table>
+
+        <table tableName="sys_resource"  domainObjectName="Resource"  mapperName="ResourceMapper" >
+            <generatedKey column="id"  sqlStatement="Mysql" />
+        </table>
+
+        <table tableName="sys_resouce_menu"  domainObjectName="ResouceMenu"  mapperName="ResouceMenuMapper" >
+            <generatedKey column="res_id"  sqlStatement="Mysql" />
+        </table>
+        <table tableName="sys_resouce_menu"  domainObjectName="ResouceMenu"  mapperName="ResouceMenuMapper" >
+            <generatedKey column="res_id"  sqlStatement="Mysql" />
+        </table>
+        <table tableName="sys_role"  domainObjectName="Role"  mapperName="RoleMenuMapper" >
+            <generatedKey column="res_id"  sqlStatement="Mysql" />
+        </table>
+        <table tableName="sys_role_resource"  domainObjectName="RoleResource"  mapperName="RoleResourceMenuMapper" >
+            <generatedKey column="id"  sqlStatement="Mysql" />
+        </table>
+        <table tableName="sys_role_resource"  domainObjectName="RoleResource"  mapperName="RoleResourceMenuMapper" >
+            <generatedKey column="id"  sqlStatement="Mysql" />
+        </table>
+        <table tableName="sys_user_department"  domainObjectName="UserDepartment"  mapperName="UserDepartmentMapper" >
+            <generatedKey column="id"  sqlStatement="Mysql" />
+        </table>
+        <table tableName="sys_user_role"  domainObjectName="UserRole"  mapperName="UserRoleMapper" >
+            <generatedKey column="id"  sqlStatement="Mysql" />
+        </table>
+        <!--<table tableName="sys_user"  domainObjectName="User"  mapperName="UserMapper" >-->
+            <!--<generatedKey column="dpt_id"  sqlStatement="Mysql" />-->
+        <!--</table>-->
+    </context>
+</generatorConfiguration>

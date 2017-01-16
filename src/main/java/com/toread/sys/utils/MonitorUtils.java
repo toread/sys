@@ -26,5 +26,4 @@ public  abstract class MonitorUtils {
         StackTraceElement stackTraceElement = Thread.currentThread().getStackTrace()[2];
         Logger.getLogger(stackTraceElement.getClassName()).info(stackTraceElement.getMethodName()+"耗时:"+(end-begin));
     }
-
 }

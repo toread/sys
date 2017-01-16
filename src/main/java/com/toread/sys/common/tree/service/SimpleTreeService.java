@@ -1,6 +1,6 @@
 package com.toread.sys.common.tree.service;
 
-import com.baomidou.framework.service.IService;
+import com.toread.sys.common.service.BaseService;
 import com.toread.sys.common.tree.Tree;
 
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * @author toread
  */
-public interface SimpleTreeService<T> extends IService<T, Long> {
+public interface SimpleTreeService<T> extends BaseService<T, Long> {
     /**
      * 增加树节点
      * @param t
@@ -23,7 +23,7 @@ public interface SimpleTreeService<T> extends IService<T, Long> {
 
 
     /**
-     * 删除树节点
+     * 更新树节点
      */
     boolean updateTreeNode(T t);
 

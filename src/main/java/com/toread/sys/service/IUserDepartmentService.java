@@ -1,14 +1,16 @@
 package com.toread.sys.service;
 
+import com.toread.sys.common.service.BaseService;
 import com.toread.sys.entity.UserDepartment;
-import com.baomidou.framework.service.ISuperService;
+
+import java.util.List;
 
 /**
  *
  * UserDepartment 表数据服务层接口
  *
  */
-public interface IUserDepartmentService extends ISuperService<UserDepartment> {
+public interface IUserDepartmentService extends BaseService<UserDepartment,Long> {
 
     /**
      * 绑定部门
@@ -16,7 +18,7 @@ public interface IUserDepartmentService extends ISuperService<UserDepartment> {
      * @param dptId
      * @return
      */
-    boolean bindUser(Long userId,Long dptId);
+    boolean bindDepartment(Long userId, List<Long> dptId);
 
     /**
      * 解绑部门
@@ -24,5 +26,6 @@ public interface IUserDepartmentService extends ISuperService<UserDepartment> {
      * @param dptId
      * @return
      */
-    boolean unBindUser(Long userId,Long dptId);
+    boolean unBindDepartment(Long userId, List<Long> dptId);
+
 }

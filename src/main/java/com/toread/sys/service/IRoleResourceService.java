@@ -1,28 +1,25 @@
 package com.toread.sys.service;
 
 import com.toread.sys.entity.RoleResource;
-import com.baomidou.framework.service.ISuperService;
+import org.springframework.util.Assert;
 
 /**
- *
- * RoleResource 表数据服务层接口
- *
+ * @author 黎志兵
  */
-public interface IRoleResourceService extends ISuperService<RoleResource> {
+public interface IRoleResourceService {
     /**
-     * 角色绑定资源
+     * 绑定资源
      * @param roleId
      * @param resourcesId
      * @return
      */
-    boolean bindResources(Long roleId,Long resourcesId);
+    public boolean bindResources(Long roleId, Long resourcesId);
 
     /**
-     * 角色解除资源
+     * 解绑资源
      * @param roleId
      * @param resourcesId
      * @return
      */
-    boolean unBindRole(Long roleId,Long resourcesId);
-
+    public boolean unbindResources(Long roleId, Long resourcesId);
 }

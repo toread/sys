@@ -1,73 +1,106 @@
 package com.toread.sys.entity;
 
-import java.io.Serializable;
+import com.toread.sys.common.mybatis.annotation.IDSequence;
+
 import java.util.Date;
+import javax.persistence.*;
 
+@Table(name = "sys_resouce_menu")
+public class ResouceMenu {
+    /**
+     * 主键
+     */
+    @Id
+    @IDSequence
+    private Long id;
 
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableName;
-import com.toread.sys.mybatis.annotation.CTime;
+    /**
+     * 菜单ID
+     */
+    @Column(name = "menu_id")
+    private Long menuId;
 
-/**
- *
- * 
- *
- */
-@TableName("sys_resouce_menu")
-public class ResouceMenu implements Serializable {
+    /**
+     * 资源id
+     */
+    @Column(name = "res_id")
+    private Long resId;
 
-	@TableField(exist = false)
-	private static final long serialVersionUID = 1L;
+    /**
+     * 创建时间
+     */
+    @Column(name = "c_time")
+    private Date cTime;
 
-	/** 主键 */
-	@TableId
-	private Long id;
+    /**
+     * 获取主键
+     *
+     * @return id - 主键
+     */
+    public Long getId() {
+        return id;
+    }
 
-	/** 菜单ID */
-	@TableField(value = "menu_id")
-	private Long menuId;
+    /**
+     * 设置主键
+     *
+     * @param id 主键
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	/** 资源id */
-	@TableField(value = "res_id")
-	private Long resId;
+    /**
+     * 获取菜单ID
+     *
+     * @return menu_id - 菜单ID
+     */
+    public Long getMenuId() {
+        return menuId;
+    }
 
-	/** 创建时间 */
-	@TableField(value = "c_time")
-	@CTime
-	private Date cTime;
+    /**
+     * 设置菜单ID
+     *
+     * @param menuId 菜单ID
+     */
+    public void setMenuId(Long menuId) {
+        this.menuId = menuId;
+    }
 
+    /**
+     * 获取资源id
+     *
+     * @return res_id - 资源id
+     */
+    public Long getResId() {
+        return resId;
+    }
 
-	public Long getId() {
-		return this.id;
-	}
+    /**
+     * 设置资源id
+     *
+     * @param resId 资源id
+     */
+    public void setResId(Long resId) {
+        this.resId = resId;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    /**
+     * 获取创建时间
+     *
+     * @return c_time - 创建时间
+     */
+    public Date getcTime() {
+        return cTime;
+    }
 
-	public Long getMenuId() {
-		return this.menuId;
-	}
-
-	public void setMenuId(Long menuId) {
-		this.menuId = menuId;
-	}
-
-	public Long getResId() {
-		return this.resId;
-	}
-
-	public void setResId(Long resId) {
-		this.resId = resId;
-	}
-
-	public Date getCTime() {
-		return this.cTime;
-	}
-
-	public void setCTime(Date cTime) {
-		this.cTime = cTime;
-	}
-
+    /**
+     * 设置创建时间
+     *
+     * @param cTime 创建时间
+     */
+    public void setcTime(Date cTime) {
+        this.cTime = cTime;
+    }
 }

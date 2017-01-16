@@ -1,124 +1,179 @@
 package com.toread.sys.entity;
 
-import java.io.Serializable;
+import com.toread.sys.common.mybatis.annotation.IDSequence;
+
 import java.util.Date;
+import javax.persistence.*;
 
+@Table(name = "sys_resource")
+public class Resource {
+    /**
+     * 资源uuid
+     */
+    @Id
+    @Column(name = "res_id")
+    @IDSequence
+    private Long resId;
 
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableName;
-import com.toread.sys.mybatis.annotation.CTime;
+    /**
+     * 资源类型
+     */
+    @Column(name = "res_type")
+    private String resType;
 
-/**
- *
- * 
- *
- */
-@TableName("sys_resource")
-public class Resource implements Serializable {
+    /**
+     * 资源名称
+     */
+    @Column(name = "res_name")
+    private String resName;
 
-	@TableField(exist = false)
-	private static final long serialVersionUID = 1L;
+    /**
+     * 资源值
+     */
+    @Column(name = "res_val")
+    private String resVal;
 
-	/** 资源uuid */
-	@TableId(value = "res_id")
-	private Long resId;
+    /**
+     * 资源状态
+     */
+    @Column(name = "res_state")
+    private String resState;
 
-	/** 资源类型 */
-	@TableField(value = "res_type")
-	private String resType;
+    /**
+     * 创建时间
+     */
+    @Column(name = "res_c_time")
+    private Date resCTime;
 
-	/** 资源名称 */
-	@TableField(value = "res_name")
-	private String resName;
+    /**
+     * 更新时间
+     */
+    @Column(name = "res_u_time")
+    private Date resUTime;
 
-	/** 资源值 */
-	@TableField(value = "res_val")
-	private String resVal;
+    /**
+     * 获取资源uuid
+     *
+     * @return res_id - 资源uuid
+     */
+    public Long getResId() {
+        return resId;
+    }
 
-	/** 资源状态 */
-	@TableField(value = "res_state")
-	private String resState;
+    /**
+     * 设置资源uuid
+     *
+     * @param resId 资源uuid
+     */
+    public void setResId(Long resId) {
+        this.resId = resId;
+    }
 
-	/** 创建时间 */
-	@TableField(value = "res_c_time")
-	@CTime
-	private Date resCTime;
+    /**
+     * 获取资源类型
+     *
+     * @return res_type - 资源类型
+     */
+    public String getResType() {
+        return resType;
+    }
 
-	/** 更新时间 */
-	@TableField(value = "res_u_time")
-	private Date resUTime;
+    /**
+     * 设置资源类型
+     *
+     * @param resType 资源类型
+     */
+    public void setResType(String resType) {
+        this.resType = resType;
+    }
 
+    /**
+     * 获取资源名称
+     *
+     * @return res_name - 资源名称
+     */
+    public String getResName() {
+        return resName;
+    }
 
-	public Long getResId() {
-		return this.resId;
-	}
+    /**
+     * 设置资源名称
+     *
+     * @param resName 资源名称
+     */
+    public void setResName(String resName) {
+        this.resName = resName;
+    }
 
-	public void setResId(Long resId) {
-		this.resId = resId;
-	}
+    /**
+     * 获取资源值
+     *
+     * @return res_val - 资源值
+     */
+    public String getResVal() {
+        return resVal;
+    }
 
-	public String getResType() {
-		return this.resType;
-	}
+    /**
+     * 设置资源值
+     *
+     * @param resVal 资源值
+     */
+    public void setResVal(String resVal) {
+        this.resVal = resVal;
+    }
 
-	public void setResType(String resType) {
-		this.resType = resType;
-	}
+    /**
+     * 获取资源状态
+     *
+     * @return res_state - 资源状态
+     */
+    public String getResState() {
+        return resState;
+    }
 
-	public String getResName() {
-		return this.resName;
-	}
+    /**
+     * 设置资源状态
+     *
+     * @param resState 资源状态
+     */
+    public void setResState(String resState) {
+        this.resState = resState;
+    }
 
-	public void setResName(String resName) {
-		this.resName = resName;
-	}
+    /**
+     * 获取创建时间
+     *
+     * @return res_c_time - 创建时间
+     */
+    public Date getResCTime() {
+        return resCTime;
+    }
 
-	public String getResVal() {
-		return this.resVal;
-	}
+    /**
+     * 设置创建时间
+     *
+     * @param resCTime 创建时间
+     */
+    public void setResCTime(Date resCTime) {
+        this.resCTime = resCTime;
+    }
 
-	public void setResVal(String resVal) {
-		this.resVal = resVal;
-	}
+    /**
+     * 获取更新时间
+     *
+     * @return res_u_time - 更新时间
+     */
+    public Date getResUTime() {
+        return resUTime;
+    }
 
-	public String getResState() {
-		return this.resState;
-	}
-
-	public void setResState(String resState) {
-		this.resState = resState;
-	}
-
-	public Date getResCTime() {
-		return this.resCTime;
-	}
-
-	public void setResCTime(Date resCTime) {
-		this.resCTime = resCTime;
-	}
-
-	public Date getResUTime() {
-		return this.resUTime;
-	}
-
-	public void setResUTime(Date resUTime) {
-		this.resUTime = resUTime;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Resource resource = (Resource) o;
-
-		return resId != null ? resId.equals(resource.resId) : resource.resId == null;
-
-	}
-
-	@Override
-	public int hashCode() {
-		return resId != null ? resId.hashCode() : 0;
-	}
+    /**
+     * 设置更新时间
+     *
+     * @param resUTime 更新时间
+     */
+    public void setResUTime(Date resUTime) {
+        this.resUTime = resUTime;
+    }
 }

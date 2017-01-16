@@ -1,8 +1,5 @@
 package com.toread.sys.config;
 
-import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.cache.annotation.EnableCaching;
-
 /**
  * @author toread
  */

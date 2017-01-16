@@ -1,73 +1,106 @@
 package com.toread.sys.entity;
 
-import java.io.Serializable;
+import com.toread.sys.common.mybatis.annotation.IDSequence;
+
 import java.util.Date;
+import javax.persistence.*;
 
+@Table(name = "sys_user_role")
+public class UserRole {
+    /**
+     * 主键
+     */
+    @Id
+    @IDSequence
+    private Long id;
 
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableName;
-import com.toread.sys.mybatis.annotation.CTime;
+    /**
+     * 用户uuid
+     */
+    @Column(name = "user_id")
+    private Long userId;
 
-/**
- *
- * 
- *
- */
-@TableName("sys_user_role")
-public class UserRole implements Serializable {
+    /**
+     * 角色uuid
+     */
+    @Column(name = "role_id")
+    private Long roleId;
 
-	@TableField(exist = false)
-	private static final long serialVersionUID = 1L;
+    /**
+     * 创建时间
+     */
+    @Column(name = "c_time")
+    private Date cTime;
 
-	/** 主键 */
-	@TableId
-	private Long id;
+    /**
+     * 获取主键
+     *
+     * @return id - 主键
+     */
+    public Long getId() {
+        return id;
+    }
 
-	/** 用户uuid */
-	@TableField(value = "user_id")
-	private Long userId;
+    /**
+     * 设置主键
+     *
+     * @param id 主键
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	/** 角色uuid */
-	@TableField(value = "role_id")
-	private Long roleId;
+    /**
+     * 获取用户uuid
+     *
+     * @return user_id - 用户uuid
+     */
+    public Long getUserId() {
+        return userId;
+    }
 
-	/** 创建时间 */
-	@TableField(value = "c_time")
-	@CTime
-	private Date cTime;
+    /**
+     * 设置用户uuid
+     *
+     * @param userId 用户uuid
+     */
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
+    /**
+     * 获取角色uuid
+     *
+     * @return role_id - 角色uuid
+     */
+    public Long getRoleId() {
+        return roleId;
+    }
 
-	public Long getId() {
-		return this.id;
-	}
+    /**
+     * 设置角色uuid
+     *
+     * @param roleId 角色uuid
+     */
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    /**
+     * 获取创建时间
+     *
+     * @return c_time - 创建时间
+     */
+    public Date getcTime() {
+        return cTime;
+    }
 
-	public Long getUserId() {
-		return this.userId;
-	}
-
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
-
-	public Long getRoleId() {
-		return this.roleId;
-	}
-
-	public void setRoleId(Long roleId) {
-		this.roleId = roleId;
-	}
-
-	public Date getCTime() {
-		return this.cTime;
-	}
-
-	public void setCTime(Date cTime) {
-		this.cTime = cTime;
-	}
-
+    /**
+     * 设置创建时间
+     *
+     * @param cTime 创建时间
+     */
+    public void setcTime(Date cTime) {
+        this.cTime = cTime;
+    }
 }

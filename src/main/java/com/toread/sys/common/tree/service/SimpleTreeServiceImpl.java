@@ -1,8 +1,7 @@
 package com.toread.sys.common.tree.service;
 
-import com.baomidou.framework.service.impl.SuperServiceImpl;
-import com.baomidou.mybatisplus.mapper.AutoMapper;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.toread.sys.common.mybatis.CRUDMapper;
+import com.toread.sys.common.service.SimpleBaseService;
 import com.toread.sys.common.tree.SimpleTree;
 import com.toread.sys.common.tree.Tree;
 import com.toread.sys.common.tree.TreeNode;
@@ -23,7 +22,7 @@ import java.util.List;
 /**
  * @author toread
  */
-public abstract class SimpleTreeServiceImpl<M extends AutoMapper<T>,T> extends SuperServiceImpl<M, T>  implements SimpleTreeService<T> {
+public abstract class SimpleTreeServiceImpl<M extends CRUDMapper<T>,T> extends SimpleBaseService<M,T,Long> implements SimpleTreeService<T> {
 
     @Autowired
     private CacheManager cacheManager;
@@ -39,10 +38,19 @@ public abstract class SimpleTreeServiceImpl<M extends AutoMapper<T>,T> extends S
 
     @Override
     public boolean addTreeNode(T t) {
-        Object pId = TreeUtils.getAnnotationFieldValues(t, TreePid.class);
-        Object id = TreeUtils.getAnnotationFieldValues(t, TreeId.class);
-        Assert.notNull(pId,"PID值为空");
-        Assert.notNull(findFather(id),String.format("未找到%s节点",id));
+        //判断数据库是否有节点
+        T root = BeanUtils.instantiate(getEntityClass());
+        TreeUtils.setAnnotationFieldValue(root,TreeId.class,rootId());
+        T fromDBRoot = selectOne(root);
+        if(fromDBRoot==null){
+            TreeUtils.setAnnotationFieldValue(t,TreeId.class,rootId());
+        }else{
+            Object pId = TreeUtils.getAnnotationFieldValues(t, TreePid.class);
+            Assert.notNull(pId,"PID值为空");
+            T father = BeanUtils.instantiate(getEntityClass());
+            TreeUtils.setAnnotationFieldValue(father,TreeId.class,pId);
+            Assert.notNull(buildTree().findTreeNode(father),String.format("未找到%s节点",pId));
+        }
         return insert(t);
     }
 
@@ -51,7 +59,7 @@ public abstract class SimpleTreeServiceImpl<M extends AutoMapper<T>,T> extends S
      * @param t
      */
     protected void insertRootNode(T t){
-        int count = this.selectCount(new EntityWrapper<T>());
+        int count = selectAll().size();
         if(count ==0){
             TreeUtils.setAnnotationFieldValue(t,TreeId.class,keyName());
             this.insert(t);
@@ -66,14 +74,13 @@ public abstract class SimpleTreeServiceImpl<M extends AutoMapper<T>,T> extends S
         Assert.notNull(findFather(pId),String.format("未找到%s节点",pId));
         Assert.notNull(findFather(id),String.format("未找到%s节点",id));
         clearTreeCache();
-        updateById(t);
+        updateSelectiveById(t);
         return  false;
     }
 
     @Override
     public boolean deleteTreeNode(T t) {
         Object pId = TreeUtils.getAnnotationFieldValues(t, TreePid.class);
-        Object id = TreeUtils.getAnnotationFieldValues(t, TreeId.class);
         Assert.notNull(pId,"PID值为空");
         Assert.notNull(findFather(pId),String.format("未找到%s节点",pId));
         return false;
@@ -86,7 +93,7 @@ public abstract class SimpleTreeServiceImpl<M extends AutoMapper<T>,T> extends S
         if(tree == null){
             tree = new SimpleTree<T>();
             Long begin = MonitorUtils.timeNow();
-            tree.buildTree(this.selectList(new EntityWrapper<T>()),rootId());
+            tree.buildTree(this.selectAll(),rootId());
             MonitorUtils.idleLogger(begin);
             cache.put(keyName(),tree);
         }
@@ -99,14 +106,21 @@ public abstract class SimpleTreeServiceImpl<M extends AutoMapper<T>,T> extends S
         T t = BeanUtils.instantiate(getEntityClass());
         TreeUtils.setAnnotationFieldValue(t,TreeId.class,depId);
         TreeNode<T> departmentTreeNode = buildTree().findTreeNode(t);
+        Assert.notNull(departmentTreeNode,String.format("未找到%s节点",depId));
         return CollectionUtils.arrayToList(TreeUtils.getTreeChildesData(departmentTreeNode).toArray());
     }
 
     @Override
     public T findFather(Object depId) {
+        //判断是否根节点
+        if(rootId().equals(depId)){
+            return  buildTree().getRoot().getData();
+        }
         Assert.notNull(depId,"节点ID不能为空");
         T t = BeanUtils.instantiate(getEntityClass());
         TreeUtils.setAnnotationFieldValue(t,TreeId.class,depId);
+        TreeNode<T> treeNode = buildTree().findTreeNode(t);
+        Assert.notNull(treeNode,String.format("未找到%s节点",depId));
         return (T) buildTree().findTreeNode(t).getFather().getData();
     }
 }

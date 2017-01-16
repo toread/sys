@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.toread.sys.mapper.DepartmentMapper">
+  <resultMap id="BaseResultMap" type="com.toread.sys.entity.Department">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="dpt_id" jdbcType="BIGINT" property="dptId" />
+    <result column="dpt_pid" jdbcType="BIGINT" property="dptPid" />
+    <result column="dpt_name" jdbcType="VARCHAR" property="dptName" />
+    <result column="dpt_type" jdbcType="VARCHAR" property="dptType" />
+    <result column="dpt_state" jdbcType="VARCHAR" property="dptState"/>
+  </resultMap>
 
 	<!-- 通用查询结果列-->
 	<sql id="Base_Column_List">

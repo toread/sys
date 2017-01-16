@@ -2,8 +2,10 @@ package com.toread.sys.common.tree;
 
 import com.toread.sys.common.tree.annotation.TreeId;
 import com.toread.sys.common.tree.annotation.TreePid;
-import com.toread.sys.utils.MonitorUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
+import org.springframework.util.CollectionUtils;
 
 import java.util.*;
 
@@ -16,14 +18,17 @@ import static com.toread.sys.common.tree.TreeUtils.getAnnotationFieldValues;
 public class SimpleTree<T> implements Tree<T> {
     protected  List<T> treeData;
     protected  TreeNode<T> rootNode;
+    private static final Logger LOG = LoggerFactory.getLogger(SimpleTree.class);
 
     @Override
-    public void buildTree(Collection<T> trees, Object rootId) {
+    public synchronized void  buildTree(Collection<T> trees, Object rootId) {
         Assert.notEmpty(trees);
         T t = findRoot(trees,rootId);
         TreeNode<T> rootNode = new SimpleTreeNode<T>();
         rootNode.setData(t);
         this.rootNode = rootNode;
+        //先移除根节点
+        trees.remove(t);
         buildChildesNode(rootId,trees,rootNode);
         treeData = buildTreeData();
     }
@@ -36,8 +41,8 @@ public class SimpleTree<T> implements Tree<T> {
     }
 
     private void addChildData(Collection<T> data,TreeNode<T> node) {
-        Collection<TreeNode<T>> childs = node.getChildes();
-        for (TreeNode<T> child : childs) {
+        Collection<TreeNode<T>> childes = node.getChildes();
+        for (TreeNode<T> child : childes) {
             data.add(child.getData());
             addChildData(data,child);
         }
@@ -79,35 +84,43 @@ public class SimpleTree<T> implements Tree<T> {
 
     @Override
     public TreeNode<T> findTreeNode(T t) {
-        if(isTreeNodeData(t,rootNode)){
-            return rootNode;
-        }else {
-            return findChild(rootNode,t);
-        }
+        return findNode(rootNode,t);
     }
 
-    private TreeNode<T> findChild(TreeNode<T> node,T t){
-        Collection<TreeNode<T>> childes = node.getChildes();
-        for (TreeNode<T> child : childes) {
-            if(isTreeNodeData(t,child)){
-                return child;
-            }else {
-                findChild(child,t);
+    private TreeNode<T> findNode(TreeNode<T> node,T t){
+        Queue<TreeNode<T>> queue = new ArrayDeque<>(getTreeData().size());
+        queue.add(node);
+        queue = makerQueue(node,queue);
+        TreeNode nodes = null;
+        while ((nodes = queue.poll())!=null){
+            if(isTreeNodeData((T) nodes.getData(),t)){
+                return  nodes;
             }
         }
-        return null;
+        return  null;
     }
 
-    private boolean isTreeNodeData(T t,TreeNode<T> treeNode){
-        Object id = getAnnotationFieldValues(t,TreeId.class);
-        Object tagId = getAnnotationFieldValues(treeNode.getData(),TreeId.class);
-        return  (tagId.equals(id));
+    private Queue<TreeNode<T>> makerQueue(TreeNode<T> node,Queue<TreeNode<T>> queue){
+        List<TreeNode<T>> childes = node.getChildes();
+        if(!CollectionUtils.isEmpty(childes)){
+            for (TreeNode<T> child : childes) {
+                queue.add(child);
+                makerQueue(child,queue);
+            }
+        }
+        return queue;
+    }
 
+    private boolean isTreeNodeData(T t,T nodeData){
+        Object id = getAnnotationFieldValues(t,TreeId.class);
+        Object tagId = getAnnotationFieldValues(nodeData,TreeId.class);
+        Boolean isTreeNode =   (tagId.equals(id));
+        return  isTreeNode;
     }
 
     @Override
     public TreeNode<T> removeTreeNode(T t) {
-        TreeNode<T>  node = findChild(rootNode,t);
+        TreeNode<T>  node = findNode(rootNode,t);
         Assert.isTrue(!node.equals(rootNode));
         node.getFather().getChildes().remove(node);
         return node;

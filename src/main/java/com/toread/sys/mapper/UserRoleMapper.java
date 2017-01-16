@@ -1,14 +1,7 @@
 package com.toread.sys.mapper;
 
+import com.toread.sys.common.mybatis.CRUDMapper;
 import com.toread.sys.entity.UserRole;
-import com.baomidou.mybatisplus.mapper.AutoMapper;
 
-/**
- *
- * UserRole 表数据库控制层接口
- *
- */
-public interface UserRoleMapper extends AutoMapper<UserRole> {
-
-
+public interface UserRoleMapper extends CRUDMapper<UserRole> {
 }

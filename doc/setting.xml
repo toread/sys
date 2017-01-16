@@ -44,7 +44,7 @@
                 </repository>
                 <repository>
                     <id>nexus-snapshots</id>
-                    <url>http://nexus-snapshots</url>
+                    <url>>http://nexus-snapshots</url>
                     <releases><enabled>true</enabled><updatePolicy>always</updatePolicy></releases>
                     <snapshots><enabled>true</enabled><updatePolicy>always</updatePolicy></snapshots>
                 </repository>
@@ -58,7 +58,7 @@
                 </pluginRepository>
                 <pluginRepository>
                     <id>nexus-snapshots</id>
-                    <url>http://nexus-snapshots</url>
+                    <url>>http://nexus-snapshots</url>
                     <releases><enabled>true</enabled><updatePolicy>always</updatePolicy></releases>
                     <snapshots><enabled>true</enabled><updatePolicy>always</updatePolicy></snapshots>
                 </pluginRepository>

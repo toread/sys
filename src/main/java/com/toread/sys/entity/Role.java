@@ -1,85 +1,131 @@
 package com.toread.sys.entity;
 
-import java.io.Serializable;
+import com.toread.sys.common.mybatis.annotation.IDSequence;
+
 import java.util.Date;
+import javax.persistence.*;
 
+@Table(name = "sys_role")
+public class Role {
+    /**
+     * 角色uuid
+     */
+    @Id
+    @Column(name = "role_id")
+    @IDSequence
+    private Long roleId;
 
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableName;
-import com.toread.sys.mybatis.annotation.CTime;
+    /**
+     * 角色名称
+     */
+    @Column(name = "role_name")
+    private String roleName;
 
-/**
- *
- * 
- *
- */
-@TableName("sys_role")
-public class Role implements Serializable {
+    /**
+     * 角色状态
+     */
+    @Column(name = "role_state")
+    private String roleState;
 
-	@TableField(exist = false)
-	private static final long serialVersionUID = 1L;
+    /**
+     * 创建时间
+     */
+    @Column(name = "role_c_time")
+    private Date roleCTime;
 
-	/** 角色uuid */
-	@TableId(value = "role_id")
-	private Long roleId;
+    /**
+     * 修改时间
+     */
+    @Column(name = "role_u_time")
+    private Date roleUTime;
 
-	/** 角色名称 */
-	@TableField(value = "role_name")
-	private String roleName;
+    /**
+     * 获取角色uuid
+     *
+     * @return role_id - 角色uuid
+     */
+    public Long getRoleId() {
+        return roleId;
+    }
 
-	/** 角色状态 */
-	@TableField(value = "role_state")
-	private String roleState;
+    /**
+     * 设置角色uuid
+     *
+     * @param roleId 角色uuid
+     */
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
 
-	/** 创建时间 */
-	@TableField(value = "role_c_time")
-	@CTime
-	private Date roleCTime;
+    /**
+     * 获取角色名称
+     *
+     * @return role_name - 角色名称
+     */
+    public String getRoleName() {
+        return roleName;
+    }
 
-	/** 修改时间 */
-	@TableField(value = "role_u_time")
-	private Date roleUTime;
+    /**
+     * 设置角色名称
+     *
+     * @param roleName 角色名称
+     */
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
 
+    /**
+     * 获取角色状态
+     *
+     * @return role_state - 角色状态
+     */
+    public String getRoleState() {
+        return roleState;
+    }
 
-	public Long getRoleId() {
-		return this.roleId;
-	}
+    /**
+     * 设置角色状态
+     *
+     * @param roleState 角色状态
+     */
+    public void setRoleState(String roleState) {
+        this.roleState = roleState;
+    }
 
-	public void setRoleId(Long roleId) {
-		this.roleId = roleId;
-	}
+    /**
+     * 获取创建时间
+     *
+     * @return role_c_time - 创建时间
+     */
+    public Date getRoleCTime() {
+        return roleCTime;
+    }
 
-	public String getRoleName() {
-		return this.roleName;
-	}
+    /**
+     * 设置创建时间
+     *
+     * @param roleCTime 创建时间
+     */
+    public void setRoleCTime(Date roleCTime) {
+        this.roleCTime = roleCTime;
+    }
 
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
-	}
+    /**
+     * 获取修改时间
+     *
+     * @return role_u_time - 修改时间
+     */
+    public Date getRoleUTime() {
+        return roleUTime;
+    }
 
-	public String getRoleState() {
-		return this.roleState;
-	}
-
-	public void setRoleState(String roleState) {
-		this.roleState = roleState;
-	}
-
-	public Date getRoleCTime() {
-		return this.roleCTime;
-	}
-
-	public void setRoleCTime(Date roleCTime) {
-		this.roleCTime = roleCTime;
-	}
-
-	public Date getRoleUTime() {
-		return this.roleUTime;
-	}
-
-	public void setRoleUTime(Date roleUTime) {
-		this.roleUTime = roleUTime;
-	}
-
+    /**
+     * 设置修改时间
+     *
+     * @param roleUTime 修改时间
+     */
+    public void setRoleUTime(Date roleUTime) {
+        this.roleUTime = roleUTime;
+    }
 }

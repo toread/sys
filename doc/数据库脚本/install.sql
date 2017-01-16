@@ -1,6 +1,6 @@
 CREATE  DATABASE  access_ctl DEFAULT  CHAR SET   utf8 COLLATE utf8_general_ci;
 
-use mysql;
+use access_ctl;
 CREATE TABLE sys_department
 (
     dpt_id BIGINT(20) PRIMARY KEY NOT NULL COMMENT '部门主键',
@@ -55,7 +55,7 @@ CREATE TABLE sys_user
 (
     user_id BIGINT(20) PRIMARY KEY NOT NULL COMMENT '用户主键',
     user_code VARCHAR(18) NOT NULL COMMENT '用户登陆代码',
-    user_pwd VARCHAR(18) NOT NULL COMMENT '用户密码',
+    user_pwd VARCHAR(128) NOT NULL COMMENT '用户密码',
     user_state VARCHAR(2) NOT NULL COMMENT '用户状态',
     user_c_time DATETIME NOT NULL COMMENT '创建时间',
     user_u_time DATETIME COMMENT '修改时间'

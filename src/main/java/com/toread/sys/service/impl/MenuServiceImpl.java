@@ -1,16 +1,10 @@
 package com.toread.sys.service.impl;
 
-import com.toread.sys.common.tree.Tree;
-import com.toread.sys.common.tree.service.SimpleTreeService;
 import com.toread.sys.common.tree.service.SimpleTreeServiceImpl;
-import org.springframework.stereotype.Service;
-
-import com.toread.sys.mapper.MenuMapper;
 import com.toread.sys.entity.Menu;
+import com.toread.sys.mapper.MenuMapper;
 import com.toread.sys.service.IMenuService;
-import com.baomidou.framework.service.impl.SuperServiceImpl;
-
-import java.util.List;
+import org.springframework.stereotype.Service;
 
 /**
  *

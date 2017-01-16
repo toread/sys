@@ -1,97 +1,161 @@
 package com.toread.sys.entity;
 
-import java.io.Serializable;
+import com.toread.sys.common.mybatis.annotation.CTime;
+import com.toread.sys.common.mybatis.annotation.IDSequence;
+import com.toread.sys.common.mybatis.annotation.UTime;
+
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
+@Table(name = "sys_user")
+public class User {
+    /**
+     * 用户主键
+     */
+    @Id
+    @Column(name = "user_id")
+    @IDSequence
+    private Long userId;
 
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableName;
-import com.toread.sys.mybatis.annotation.CTime;
+    /**
+     * 用户登陆代码
+     */
+    @Column(name = "user_code")
+    private String userCode;
 
-/**
- *
- * 
- *
- */
-@TableName("sys_user")
-public class User implements Serializable {
+    /**
+     * 用户密码
+     */
+    @Column(name = "user_pwd")
+    private String userPwd;
 
-	@TableField(exist = false)
-	private static final long serialVersionUID = 1L;
+    /**
+     * 用户状态
+     */
+    @Column(name = "user_state")
+    private Integer userState;
 
-	/** 用户主键 */
-	@TableId(value = "user_id")
-	private Long userId;
+    /**
+     * 创建时间
+     */
+    @Column(name = "user_c_time")
+    @CTime
+    private Date userCTime;
 
-	/** 用户登陆代码 */
-	@TableField(value = "user_code")
-	private String userCode;
+    /**
+     * 修改时间
+     */
+    @Column(name = "user_u_time")
+    @UTime
+    private Date userUTime;
 
-	/** 用户密码 */
-	@TableField(value = "user_pwd")
-	private String userPwd;
+    /**
+     * 获取用户主键
+     *
+     * @return user_id - 用户主键
+     */
+    public Long getUserId() {
+        return userId;
+    }
 
-	/** 用户状态 */
-	@TableField(value = "user_state")
-	private String userState;
+    /**
+     * 设置用户主键
+     *
+     * @param userId 用户主键
+     */
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
-	/** 创建时间 */
-	@TableField(value = "user_c_time")
-	@CTime
-	private Date userCTime;
+    /**
+     * 获取用户登陆代码
+     *
+     * @return user_code - 用户登陆代码
+     */
+    public String getUserCode() {
+        return userCode;
+    }
 
-	/** 修改时间 */
-	@TableField(value = "user_u_time")
-	private Date userUTime;
+    /**
+     * 设置用户登陆代码
+     *
+     * @param userCode 用户登陆代码
+     */
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
+    }
 
+    /**
+     * 获取用户密码
+     *
+     * @return user_pwd - 用户密码
+     */
+    public String getUserPwd() {
+        return userPwd;
+    }
 
-	public Long getUserId() {
-		return this.userId;
-	}
+    /**
+     * 设置用户密码
+     *
+     * @param userPwd 用户密码
+     */
+    public void setUserPwd(String userPwd) {
+        this.userPwd = userPwd;
+    }
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
+    /**
+     * 获取用户状态
+     *
+     * @return user_state - 用户状态
+     */
+    public Integer getUserState() {
+        return userState;
+    }
 
-	public String getUserCode() {
-		return this.userCode;
-	}
+    /**
+     * 设置用户状态
+     *
+     * @param userState 用户状态
+     */
+    public void setUserState(Integer userState) {
+        this.userState = userState;
+    }
 
-	public void setUserCode(String userCode) {
-		this.userCode = userCode;
-	}
+    /**
+     * 获取创建时间
+     *
+     * @return user_c_time - 创建时间
+     */
+    public Date getUserCTime() {
+        return userCTime;
+    }
 
-	public String getUserPwd() {
-		return this.userPwd;
-	}
+    /**
+     * 设置创建时间
+     *
+     * @param userCTime 创建时间
+     */
+    public void setUserCTime(Date userCTime) {
+        this.userCTime = userCTime;
+    }
 
-	public void setUserPwd(String userPwd) {
-		this.userPwd = userPwd;
-	}
+    /**
+     * 获取修改时间
+     *
+     * @return user_u_time - 修改时间
+     */
+    public Date getUserUTime() {
+        return userUTime;
+    }
 
-	public String getUserState() {
-		return this.userState;
-	}
-
-	public void setUserState(String userState) {
-		this.userState = userState;
-	}
-
-	public Date getUserCTime() {
-		return this.userCTime;
-	}
-
-	public void setUserCTime(Date userCTime) {
-		this.userCTime = userCTime;
-	}
-
-	public Date getUserUTime() {
-		return this.userUTime;
-	}
-
-	public void setUserUTime(Date userUTime) {
-		this.userUTime = userUTime;
-	}
-
+    /**
+     * 设置修改时间
+     *
+     * @param userUTime 修改时间
+     */
+    public void setUserUTime(Date userUTime) {
+        this.userUTime = userUTime;
+    }
 }

@@ -1,8 +1,8 @@
 package com.toread.sys.service;
 
 import com.toread.sys.common.enums.State;
+import com.toread.sys.common.service.BaseService;
 import com.toread.sys.entity.Resource;
-import com.baomidou.framework.service.ISuperService;
 
 import java.util.List;
 import java.util.Set;
@@ -12,7 +12,8 @@ import java.util.Set;
  * Resource 表数据服务层接口
  *
  */
-public interface IResourceService extends ISuperService<Resource> {
+public interface IResourceService extends BaseService<Resource,Long> {
+
     /**
      * 获取用户所有资源
      * @param userId 用户ID
@@ -34,7 +35,7 @@ public interface IResourceService extends ISuperService<Resource> {
      * @param RoleId
      * @param state
      * @return
-     */
-    List<Resource> queryRoleResources(Long RoleId, State state);
+*/
+        List<Resource> queryRoleResources(Long RoleId, State state);
 
-}
+        }

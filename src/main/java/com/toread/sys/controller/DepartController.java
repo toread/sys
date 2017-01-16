@@ -1,17 +1,18 @@
 package com.toread.sys.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.toread.sys.config.APIRout;
-import com.toread.sys.entity.Department;
 import com.toread.sys.entity.Department;
 import com.toread.sys.service.IDepartmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 /**
  * @author toread
@@ -24,27 +25,27 @@ public class DepartController {
     private IDepartmentService departmentService;
 
     /**
-     * 增加一个列表
+     * 增加一个部门
      * @param Department
      * @return
      */
     @RequestMapping(method = {RequestMethod.POST},value = APIRout.DeptAPI.ADD)
-    public Boolean addDepartment(@RequestBody Department Department){
+    public Boolean addDepartment(@Validated @RequestBody Department Department){
         return departmentService.addTreeNode(Department);
     }
 
     /**
-     * 删除列表
+     * 删除一个部门
      * @param Department
      * @return
      */
-    @RequestMapping(method = {RequestMethod.DELETE},value = APIRout.DeptAPI.DELETE)
-    public Boolean deleteDepartment(@RequestBody Department Department){
-        return  departmentService.deleteTreeNode(Department);
+    @RequestMapping(method = {RequestMethod.POST},value = APIRout.DeptAPI.DELETE)
+    public void deleteDepartment(@RequestBody Department Department){
+        departmentService.deleteTreeNode(Department);
     }
 
     /**
-     * 更新列表
+     * 更新一个部门
      * @param Department
      * @return
      */

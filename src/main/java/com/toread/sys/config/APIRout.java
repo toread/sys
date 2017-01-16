@@ -17,6 +17,7 @@ public class APIRout {
         public static final String DELETE="/user/delete";      //删除用户
         public static final String ADD="/user/add";            //更新用户
         public static final String UPDATE="/user/update";      //增加用户
+        public static final String QUERY="/user/query";      //查询用户
     }
 
 }

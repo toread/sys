@@ -1,11 +1,10 @@
 package com.toread.sys.service.impl;
 
-import org.springframework.stereotype.Service;
-
-import com.toread.sys.mapper.ResouceMenuMapper;
+import com.toread.sys.common.service.SimpleBaseService;
 import com.toread.sys.entity.ResouceMenu;
+import com.toread.sys.mapper.ResouceMenuMapper;
 import com.toread.sys.service.IResouceMenuService;
-import com.baomidou.framework.service.impl.SuperServiceImpl;
+import org.springframework.stereotype.Service;
 
 /**
  *
@@ -13,7 +12,7 @@ import com.baomidou.framework.service.impl.SuperServiceImpl;
  *
  */
 @Service
-public class ResouceMenuServiceImpl extends SuperServiceImpl<ResouceMenuMapper, ResouceMenu> implements IResouceMenuService {
+public class ResouceMenuServiceImpl extends SimpleBaseService<ResouceMenuMapper, ResouceMenu,Long> implements IResouceMenuService {
 
 
 }

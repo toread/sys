@@ -1,6 +1,5 @@
 package com.toread.sys.common.tree;
 
-import java.util.Collection;
 import java.util.List;
 
 /**

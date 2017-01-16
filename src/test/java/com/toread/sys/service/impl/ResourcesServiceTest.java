@@ -21,7 +21,7 @@ public class ResourcesServiceTest extends AccessCtlApplicationTests {
     @Autowired
     private IRoleService roleService;
     @Autowired
-    private IRoleResourceService roleResourcesService;
+    private RoleResourceServiceImpl roleResourcesService;
     @Autowired
     private IUserRoleService userRoleService;
 
@@ -32,13 +32,13 @@ public class ResourcesServiceTest extends AccessCtlApplicationTests {
     public void before(){
         //创建一个用户
         user = new User();
-        user.setUserState(State.ENABLED.getCode());
+        user.setUserState(State.ENABLED.code());
         user.setUserCode("toread");
         user.setUserPwd("toread");
         userService.insert(user);
         //创建一个角色
         Role role = new Role();
-        role.setRoleState(State.ENABLED.getCode());
+        role.setRoleState(State.ENABLED.code());
         role.setRoleName("官员员");
         roleService.insert(role);
         //创建角色与人员的绑定关系
@@ -49,7 +49,7 @@ public class ResourcesServiceTest extends AccessCtlApplicationTests {
         //创建一个资源
         resources = new Resource();
         resources.setResName("code");
-        resources.setResState(State.ENABLED.getCode());
+        resources.setResState(State.ENABLED.code());
         resources.setResType("1");
         resources.setResVal("xxxxx");
         resourcesService.insert(resources);

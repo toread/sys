@@ -1,26 +1,16 @@
 package com.toread.sys.service.impl;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.toread.sys.common.tree.SimpleTree;
-import com.toread.sys.common.tree.Tree;
-import com.toread.sys.common.tree.TreeNode;
-import com.toread.sys.common.tree.TreeUtils;
-import com.toread.sys.common.tree.service.SimpleTreeService;
+import com.toread.sys.common.enums.State;
 import com.toread.sys.common.tree.service.SimpleTreeServiceImpl;
 import com.toread.sys.config.CacheConfig;
+import com.toread.sys.entity.Department;
+import com.toread.sys.mapper.DepartmentMapper;
+import com.toread.sys.service.IDepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Service;
-
-import com.toread.sys.mapper.DepartmentMapper;
-import com.toread.sys.entity.Department;
-import com.toread.sys.service.IDepartmentService;
-import com.baomidou.framework.service.impl.SuperServiceImpl;
 import org.springframework.util.Assert;
-import org.springframework.util.CollectionUtils;
-
-import java.util.List;
 
 /**
  *
@@ -28,7 +18,6 @@ import java.util.List;
  */
 @Service
 public class DepartmentServiceImpl extends SimpleTreeServiceImpl<DepartmentMapper, Department> implements IDepartmentService {
-
     @Autowired
     private CacheManager cacheManager;
 
@@ -46,6 +35,23 @@ public class DepartmentServiceImpl extends SimpleTreeServiceImpl<DepartmentMappe
     protected String keyName() {
         return IDepartmentService.TREE_KEY;
     }
+
+
+    @Override
+    public boolean addTreeNode(Department department) {
+        return super.addTreeNode(department);
+    }
+
+    @Override
+    public boolean updateTreeNode(Department department) {
+        //判断数据
+        if(department.getDptState()!=null){
+            Assert.notNull(State.getState(department.getDptState()),"部门状态不正确");
+        }
+        //TODO 增加机构类型判断
+        return super.updateTreeNode(department);
+    }
+
 
     @Override
     public Object rootId() {

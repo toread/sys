@@ -1,7 +1,5 @@
 package com.toread.sys.common.tree;
 
-import com.toread.sys.entity.Department;
-
 import java.util.Collection;
 import java.util.List;
 
@@ -18,7 +16,7 @@ public interface Tree<T> {
      * @param trees 集合
      * @return
      */
-    void buildTree(Collection<T> trees,Object rootId);
+    void  buildTree(Collection<T> trees,Object rootId);
 
     /**
      * 获取树根节点
