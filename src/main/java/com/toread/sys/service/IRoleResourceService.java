@@ -1,8 +1,5 @@
 package com.toread.sys.service;
 
-import com.toread.sys.entity.RoleResource;
-import org.springframework.util.Assert;
-
 /**
  * @author 黎志兵
  */

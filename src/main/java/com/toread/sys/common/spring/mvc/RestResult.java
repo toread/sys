@@ -1,4 +1,4 @@
-package com.toread.sys.common.mvc;
+package com.toread.sys.common.spring.mvc;
 
 /**
  * @author 黎志兵

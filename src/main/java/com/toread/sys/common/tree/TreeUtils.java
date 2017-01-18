@@ -1,9 +1,9 @@
 package com.toread.sys.common.tree;
 
+import com.toread.sys.common.Check;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
-import org.springframework.util.Assert;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -60,7 +60,7 @@ public abstract class TreeUtils {
      * @return
      */
     public static <T> Collection<T>  getTreeChildesData(TreeNode<T> treeNode){
-        Assert.notNull(treeNode,"树节点不能为空");
+        Check.notNull(treeNode,"树节点不能为空");
         Collection<TreeNode<T>>  treeNodes = treeNode.getChildes();
         Collection<T>  datas = new ArrayList<T>();
         for (TreeNode<T> node : treeNodes) {

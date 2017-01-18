@@ -1,6 +1,7 @@
 package com.toread.sys.common.service;
 
 import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
@@ -24,5 +25,5 @@ public interface BaseService<T,ID> {
     T selectById(Object key);
     List<T> selectByExample(Object example);
     int selectCountByExample(Object example);
-    Page<T> selectByExamplePage(Object example,Page page);
+    Page<T> selectByExamplePage(Object example,PageInfo page);
 }

@@ -1,10 +1,10 @@
 package com.toread.sys.common.tree;
 
+import com.toread.sys.common.Check;
 import com.toread.sys.common.tree.annotation.TreeId;
 import com.toread.sys.common.tree.annotation.TreePid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
 import java.util.*;
@@ -22,7 +22,7 @@ public class SimpleTree<T> implements Tree<T> {
 
     @Override
     public synchronized void  buildTree(Collection<T> trees, Object rootId) {
-        Assert.notEmpty(trees);
+        Check.notEmpty(trees,"构建树集合不能为空");
         T t = findRoot(trees,rootId);
         TreeNode<T> rootNode = new SimpleTreeNode<T>();
         rootNode.setData(t);
@@ -121,7 +121,7 @@ public class SimpleTree<T> implements Tree<T> {
     @Override
     public TreeNode<T> removeTreeNode(T t) {
         TreeNode<T>  node = findNode(rootNode,t);
-        Assert.isTrue(!node.equals(rootNode));
+        Check.isTrue(!node.equals(rootNode),"根节点树不能被移除");
         node.getFather().getChildes().remove(node);
         return node;
     }

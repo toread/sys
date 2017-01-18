@@ -2,6 +2,7 @@ package com.toread.sys.common.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.toread.sys.common.mybatis.CRUDMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -94,7 +95,7 @@ public class SimpleBaseService<M extends CRUDMapper<T>,T,ID> implements  BaseSer
     }
 
     @Override
-    public Page<T> selectByExamplePage(Object example, Page page) {
+    public Page<T> selectByExamplePage(Object example, PageInfo page) {
         PageHelper.startPage(page);
         return (Page<T>) mapper.selectByExample(example);
     }

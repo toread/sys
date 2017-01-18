@@ -1,9 +1,9 @@
 package com.toread.sys.common.tree;
 
+import com.toread.sys.common.Check;
 import com.toread.sys.common.tree.annotation.TreeId;
 import com.toread.sys.common.tree.annotation.TreePid;
 import com.toread.sys.common.tree.annotation.TreeText;
-import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -36,8 +36,8 @@ public class SimpleTreeNode<T> implements TreeNode<T> {
         }else {
             Object id = TreeUtils.getAnnotationFieldValues(father.getData(), TreeId.class);
             Object fatherId = TreeUtils.getAnnotationFieldValues(t, TreePid.class);
-            Assert.notNull(id);Assert.notNull(fatherId);
-            Assert.isTrue(id.equals(fatherId));
+            Check.notNull(id,"树Id不能为空");Check.notNull(fatherId,"树Pid不能为空");
+            Check.isTrue(id.equals(fatherId),"树Id不能等于树Pid");
             data = t;
         }
     }
@@ -55,12 +55,12 @@ public class SimpleTreeNode<T> implements TreeNode<T> {
     public TreeNode removeChild(T t) {
         if(CollectionUtils.isEmpty(childesNode)){return  null;}
         Object id = TreeUtils.getAnnotationFieldValues(t,TreeId.class);
-        Assert.notNull(id);
+        Check.notNull(id,"树ID不能为空");
         Iterator<TreeNode<T>> iterable = childesNode.iterator();
         while (iterable.hasNext()){
             TreeNode<T> tTreeNode = iterable.next();
             Object tagId = TreeUtils.getAnnotationFieldValues(tTreeNode.getData(),TreeId.class);
-            Assert.notNull(tagId);
+            Check.notNull(tagId,"树ID不能为空");
             if(tagId.equals(id)){return tTreeNode;}
         }
         return null;

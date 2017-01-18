@@ -2,8 +2,10 @@ package com.toread.sys.entity;
 
 import com.toread.sys.common.mybatis.annotation.IDSequence;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
-import javax.persistence.*;
 
 @Table(name = "sys_resource")
 public class Resource {
@@ -37,7 +39,7 @@ public class Resource {
      * 资源状态
      */
     @Column(name = "res_state")
-    private String resState;
+    private Integer resState;
 
     /**
      * 创建时间
@@ -128,7 +130,7 @@ public class Resource {
      *
      * @return res_state - 资源状态
      */
-    public String getResState() {
+    public Integer getResState() {
         return resState;
     }
 
@@ -137,7 +139,7 @@ public class Resource {
      *
      * @param resState 资源状态
      */
-    public void setResState(String resState) {
+    public void setResState(Integer resState) {
         this.resState = resState;
     }
 

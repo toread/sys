@@ -1,5 +1,6 @@
 package com.toread.sys.service.impl;
 
+import com.toread.sys.common.Check;
 import com.toread.sys.common.enums.State;
 import com.toread.sys.common.service.SimpleBaseService;
 import com.toread.sys.entity.Resource;
@@ -9,7 +10,6 @@ import com.toread.sys.service.IResourceService;
 import com.toread.sys.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
 import java.util.Collections;
@@ -33,7 +33,7 @@ public class ResourceServiceImpl extends SimpleBaseService<ResourceMapper, Resou
 
     @Override
     public Set<Resource> queryUserResources(Long userId, State state) {
-        Assert.notNull(userId);Assert.notNull(state);
+        Check.notNull(userId,"用户Id不能为空");Check.notNull(state,"用户状态不能为空");
         List<Role> roles = roleService.queryUserRole(userId,State.ENABLED);
         if(CollectionUtils.isEmpty(roles))return Collections.emptySet();
         Set<Resource> resources = new HashSet<>(80);
@@ -45,15 +45,15 @@ public class ResourceServiceImpl extends SimpleBaseService<ResourceMapper, Resou
 
     @Override
     public boolean  allowAccessResources(Long userId, Resource resources) {
-        Assert.notNull(userId);
-        Assert.notNull(resources);
+        Check.notNull(userId,"用户Id不能为空");
+        Check.notNull(resources,"资源不能为空");
         return queryUserResources(userId,State.ENABLED).contains(resources);
     }
 
     @Override
     public List<Resource> queryRoleResources(Long roleId, State state) {
-        Assert.notNull(roleId);
-        Assert.notNull(state);
+        Check.notNull(roleId,"角色Id不能为空");
+        Check.notNull(state,"用户状态不能为空");
         return mapper.queryRoleResources(roleId,state.code());
     }
 }

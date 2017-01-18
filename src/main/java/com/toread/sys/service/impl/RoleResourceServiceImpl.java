@@ -1,6 +1,6 @@
 package com.toread.sys.service.impl;
 
-import com.toread.sys.common.service.BaseService;
+import com.toread.sys.common.Check;
 import com.toread.sys.common.service.SimpleBaseService;
 import com.toread.sys.entity.RoleResource;
 import com.toread.sys.mapper.RoleResourceMapper;
@@ -9,7 +9,6 @@ import com.toread.sys.service.IRoleResourceService;
 import com.toread.sys.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 
 /**
  *
@@ -26,9 +25,9 @@ public class RoleResourceServiceImpl extends SimpleBaseService<RoleResourceMappe
 
     @Override
     public boolean bindResources(Long roleId, Long resourcesId) {
-        Assert.notNull(roleId);Assert.notNull(roleId);
-        Assert.notNull(resourcesService.selectById(resourcesId));
-        Assert.notNull(roleService.selectById(roleId));
+        Check.notNull(roleId,"角色ID不能为空");
+        Check.notNull(resourcesService.selectById(resourcesId),"未找到该资源");
+        Check.notNull(roleService.selectById(roleId),"未找到该角色");
         RoleResource roleResources = new RoleResource();
         roleResources.setResId(resourcesId);
         roleResources.setRoleId(roleId);
@@ -37,7 +36,7 @@ public class RoleResourceServiceImpl extends SimpleBaseService<RoleResourceMappe
 
     @Override
     public boolean unbindResources(Long roleId, Long resourcesId) {
-        Assert.notNull(roleId);Assert.notNull(roleId);
+        Check.notNull(roleId,"角色ID不能为空");Check.notNull(resourcesId,"资源Id不能为空");
         RoleResource roleResources = new RoleResource();
         roleResources.setResId(resourcesId);
         roleResources.setRoleId(roleId);

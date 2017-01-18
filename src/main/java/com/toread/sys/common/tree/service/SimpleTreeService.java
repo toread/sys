@@ -34,7 +34,7 @@ public interface SimpleTreeService<T> extends BaseService<T, Long> {
     Tree<T> buildTree();
 
     /**
-     * 获取节点部门
+     * 获取子节点
      * @param depId
      * @return
      */

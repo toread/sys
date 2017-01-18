@@ -13,11 +13,21 @@ public class APIRout {
    }
 
     //用户模块
-    public static class  UserAPI{
+    public static class  roleAPI{
         public static final String DELETE="/user/delete";      //删除用户
         public static final String ADD="/user/add";            //更新用户
         public static final String UPDATE="/user/update";      //增加用户
         public static final String QUERY="/user/query";      //查询用户
+    }
+
+    /**
+     * 资源模块
+     */
+    public static class RoleAPI{
+        public static final String DELETE="/role/delete";      //删除资源
+        public static final String ADD="/role/add";            //更新资源
+        public static final String UPDATE="/role/update";      //增加资源
+        public static final String QUERY="/role/query";       //查询资源
     }
 
 }

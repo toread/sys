@@ -1,28 +1,15 @@
 package com.toread.sys.controller;
 
-import com.toread.sys.AccessCtlApplication;
 import com.toread.sys.base.ControllerTest;
 import com.toread.sys.common.enums.State;
-import com.toread.sys.common.mvc.RestResult;
+import com.toread.sys.common.spring.mvc.RestResult;
 import com.toread.sys.config.APIRout;
 import com.toread.sys.entity.Department;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.RequestEntity;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import static org.junit.Assert.*;
 
 /**
  * @author 黎志兵

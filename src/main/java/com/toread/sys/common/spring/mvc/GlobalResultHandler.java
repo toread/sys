@@ -1,5 +1,6 @@
-package com.toread.sys.common.mvc;
+package com.toread.sys.common.spring.mvc;
 
+import com.toread.sys.common.exception.BusinessException;
 import com.toread.sys.common.validate.ArgumentNotValidException;
 import org.apache.log4j.Logger;
 import org.springframework.core.MethodParameter;
@@ -11,6 +12,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,27 +26,58 @@ import java.util.List;
 public class GlobalResultHandler  implements ResponseBodyAdvice {
     protected static final Logger LOGGER = Logger.getLogger(GlobalResultHandler.class);
 
+
     /**
      * 处理系统所有异常
      * @param e
      * @param request
      * @return
      */
-    @ExceptionHandler({ Exception.class })
+    @ExceptionHandler({ BusinessException.class})
     @ResponseBody
-    protected RestResult handleInvalidRequest(HttpServletRequest request, Exception e) {
+    protected RestResult handleBusinessException(HandlerMethod method, HttpServletRequest request, Exception e) {
         LOGGER.error(e.getMessage(),e);
         RestResult restResult = new RestResult();
-        String msg = StringUtils.hasText(e.getMessage())?e.getMessage():"操作失败";
-        restResult.setMsg(msg);
+        RestResultMsg restResultMsg =  AnnotationUtils.findAnnotation(method.getMethod(),RestResultMsg.class);
+        if(restResultMsg!=null){
+            restResult.setMsg(restResultMsg.fail());
+        }else{
+            String msg = StringUtils.hasText(e.getMessage())?e.getMessage():"操作失败";
+            restResult.setMsg(msg);
+        }
         restResult.setOperateResult(RestResult.OperateResult.FAIL);
+        restResult.setErrorType(RestResult.ErrorType.BUSINESS_ERROR);
+        return restResult;
+    }
+
+    /**
+     * 处理业务异常
+     * @param e
+     * @param request
+     * @return
+     */
+    @ExceptionHandler({ Exception.class})
+    @ResponseBody
+    protected RestResult handleException(HandlerMethod method, HttpServletRequest request, Exception e) {
+        LOGGER.error(e.getMessage(),e);
+        RestResult restResult = new RestResult();
+        RestResultMsg restResultMsg =  AnnotationUtils.findAnnotation(method.getMethod(),RestResultMsg.class);
+        if(restResultMsg!=null){
+            restResult.setMsg(restResultMsg.fail());
+        }else{
+            String msg = StringUtils.hasText(e.getMessage())?e.getMessage():"操作失败";
+            restResult.setMsg(msg);
+        }
+        restResult.setOperateResult(RestResult.OperateResult.FAIL);
+        restResult.setErrorType(RestResult.ErrorType.SYS_ERROR);
         return restResult;
     }
 
 
+
     @ExceptionHandler({ MethodArgumentNotValidException.class, ArgumentNotValidException.class})
     @ResponseBody
-    protected RestResult handleMethodArgumentNotValidException(HttpServletRequest request, Exception e) {
+    protected RestResult handleMethodArgumentNotValidException(HandlerMethod method,HttpServletRequest request, Exception e) {
         LOGGER.error(e.getMessage(),e);
         RestResult restResult = RestResult.getSuccessInstance();
         if(e instanceof  MethodArgumentNotValidException){
@@ -88,6 +121,10 @@ public class GlobalResultHandler  implements ResponseBodyAdvice {
         else{
             RestResult result = RestResult.getSuccessInstance();
             result.setData(body);
+            RestResultMsg restResultMsg =  AnnotationUtils.findAnnotation(returnType.getMethod(),RestResultMsg.class);
+            if(restResultMsg!=null){
+                result.setMsg(restResultMsg.success());
+            }
             return  result;
         }
     }

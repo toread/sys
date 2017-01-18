@@ -1,6 +1,7 @@
 package com.toread.sys.service;
 
 import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import com.toread.sys.common.service.BaseService;
 import com.toread.sys.entity.User;
 
@@ -35,5 +36,5 @@ public interface IUserService extends BaseService<User,Long> {
      * @param user
      * @return
      */
-    Page<User> queryUsers(Page<User> page, User user);
+    Page<User> queryUsers(PageInfo<User> page, User user);
 }

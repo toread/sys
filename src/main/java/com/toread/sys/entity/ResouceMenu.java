@@ -2,8 +2,10 @@ package com.toread.sys.entity;
 
 import com.toread.sys.common.mybatis.annotation.IDSequence;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
-import javax.persistence.*;
 
 @Table(name = "sys_resouce_menu")
 public class ResouceMenu {

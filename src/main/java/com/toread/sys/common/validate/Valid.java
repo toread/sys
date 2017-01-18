@@ -1,6 +1,6 @@
 package com.toread.sys.common.validate;
 
-import com.toread.sys.common.mvc.RestResult;
+import com.toread.sys.common.spring.mvc.RestResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;

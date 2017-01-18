@@ -3,13 +3,18 @@ package com.toread.sys;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.toread.sys.common.mybatis.CRUDMapper;
+import com.toread.sys.common.spring.SpringContext;
 import org.hibernate.validator.HibernateValidator;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.BeansException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.support.ConversionServiceFactoryBean;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -25,7 +30,7 @@ import java.util.List;
 @MapperScan(basePackages = "com.toread.sys.mapper",markerInterface = CRUDMapper.class)
 @EnableCaching
 @EnableWebMvc
-public class AccessCtlApplication   extends SpringBootServletInitializer {
+public class AccessCtlApplication   extends SpringBootServletInitializer implements ApplicationContextAware {
 
 	public AccessCtlApplication() {
 		super();
@@ -66,5 +71,16 @@ public class AccessCtlApplication   extends SpringBootServletInitializer {
 	public SessionLocaleResolver sessionLocaleResolver(){
 		SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
 		return sessionLocaleResolver;
+	}
+
+	@Bean(name = "customizationConversionService")
+	public ConversionServiceFactoryBean conversionServiceFactoryBean(){
+		ConversionServiceFactoryBean conversionServiceFactoryBean = new ConversionServiceFactoryBean();
+		return conversionServiceFactoryBean;
+	}
+
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		SpringContext.setApplicationContext(applicationContext);
 	}
 }

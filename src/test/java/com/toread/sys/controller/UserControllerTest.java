@@ -1,35 +1,34 @@
 package com.toread.sys.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.toread.sys.base.ControllerTest;
 import com.toread.sys.common.enums.State;
-import com.toread.sys.common.mvc.RestResult;
+import com.toread.sys.common.spring.mvc.RestResult;
 import com.toread.sys.config.APIRout;
-import com.toread.sys.entity.Department;
 import com.toread.sys.entity.User;
-import com.toread.sys.utils.JsonConvertBeanUtils;
+import com.toread.sys.service.IUserService;
+import com.toread.sys.utils.MapBeanUtils;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
-import org.springframework.util.CollectionUtils;
-import org.springframework.web.client.RestTemplate;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.Assert.*;
 
 /**
  * @author 黎志兵
  */
 public class UserControllerTest  extends ControllerTest{
 
+    @Autowired
+    private IUserService userService;
     @Test
     public void addUser() throws Exception {
         User user = new User();
         user.setUserState(State.ENABLED.code());
         user.setUserCode("toread11");
         user.setUserPwd("admin");
-        Map mpa = JsonConvertBeanUtils.mapToBean(Map.class,user);
+        Map mpa = MapBeanUtils.beanToMap(user);
         mpa.put("departmentId","2");
         RestResult xxx = restTemplate.postForObject(APIRout.UserAPI.ADD,mpa, RestResult.class);
         Assert.isTrue(xxx.getOperateResult().equals(RestResult.OperateResult.SUCCESS));
@@ -41,7 +40,7 @@ public class UserControllerTest  extends ControllerTest{
         user.setUserState(State.ENABLED.code());
         user.setUserCode("toread11");
         user.setUserPwd("admin");
-        Map mpa = JsonConvertBeanUtils.mapToBean(Map.class,user);
+        Map mpa = MapBeanUtils.beanToMap(user);
         mpa.put("departmentId","2");
         RestResult xxx = restTemplate.postForObject(APIRout.UserAPI.ADD,mpa, RestResult.class);
         Assert.isTrue(xxx.getOperateResult().equals(RestResult.OperateResult.SUCCESS));
@@ -51,11 +50,19 @@ public class UserControllerTest  extends ControllerTest{
 
     @Test
     public void updateUser() throws Exception {
-
+        List<User> list  = userService.selectAll();
+        list.get(0).setUserCode("chuanqi");
+        RestResult  restResult = restTemplate.postForObject(APIRout.UserAPI.UPDATE,list.get(0),RestResult.class);
+        Assert.isTrue(restResult.getOperateResult().equals(RestResult.OperateResult.SUCCESS));
     }
 
     @Test
     public void queryUser() throws Exception {
-
+        Map<String,Object> mps = new HashMap<>();
+        mps.put("pageNum","1");
+        mps.put("pageSize","22");
+        mps.put("userCode","");
+        RestResult  restResult = restTemplate.postForObject(APIRout.UserAPI.QUERY,mps,RestResult.class);
+        Assert.isTrue(restResult.getOperateResult().equals(RestResult.OperateResult.SUCCESS));
     }
 }

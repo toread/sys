@@ -1,5 +1,6 @@
 package com.toread.sys.service.impl;
 
+import com.toread.sys.common.Check;
 import com.toread.sys.common.enums.State;
 import com.toread.sys.common.tree.service.SimpleTreeServiceImpl;
 import com.toread.sys.config.CacheConfig;
@@ -10,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 
 /**
  *
@@ -46,7 +46,7 @@ public class DepartmentServiceImpl extends SimpleTreeServiceImpl<DepartmentMappe
     public boolean updateTreeNode(Department department) {
         //判断数据
         if(department.getDptState()!=null){
-            Assert.notNull(State.getState(department.getDptState()),"部门状态不正确");
+            Check.notNull(State.getState(department.getDptState()),"部门状态不正确");
         }
         //TODO 增加机构类型判断
         return super.updateTreeNode(department);
