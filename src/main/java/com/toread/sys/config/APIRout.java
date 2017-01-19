@@ -13,7 +13,7 @@ public class APIRout {
    }
 
     //用户模块
-    public static class  roleAPI{
+    public static class  UserAPI{
         public static final String DELETE="/user/delete";      //删除用户
         public static final String ADD="/user/add";            //更新用户
         public static final String UPDATE="/user/update";      //增加用户

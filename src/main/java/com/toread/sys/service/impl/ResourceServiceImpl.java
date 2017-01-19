@@ -1,8 +1,8 @@
 package com.toread.sys.service.impl;
 
-import com.toread.sys.common.Check;
 import com.toread.sys.common.enums.State;
 import com.toread.sys.common.service.SimpleBaseService;
+import com.toread.sys.common.validate.Check;
 import com.toread.sys.entity.Resource;
 import com.toread.sys.entity.Role;
 import com.toread.sys.mapper.ResourceMapper;
@@ -29,7 +29,6 @@ public class ResourceServiceImpl extends SimpleBaseService<ResourceMapper, Resou
     private IRoleService roleService;
     @Autowired
     private IResourceService resourcesService;
-
 
     @Override
     public Set<Resource> queryUserResources(Long userId, State state) {

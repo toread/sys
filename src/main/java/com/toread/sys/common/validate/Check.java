@@ -1,4 +1,4 @@
-package com.toread.sys.common;
+package com.toread.sys.common.validate;
 
 import com.toread.sys.common.exception.BusinessException;
 import org.springframework.util.CollectionUtils;

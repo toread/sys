@@ -1,6 +1,5 @@
 package com.toread.sys.common.tree.service;
 
-import com.toread.sys.common.Check;
 import com.toread.sys.common.mybatis.CRUDMapper;
 import com.toread.sys.common.service.SimpleBaseService;
 import com.toread.sys.common.tree.SimpleTree;
@@ -9,6 +8,7 @@ import com.toread.sys.common.tree.TreeNode;
 import com.toread.sys.common.tree.TreeUtils;
 import com.toread.sys.common.tree.annotation.TreeId;
 import com.toread.sys.common.tree.annotation.TreePid;
+import com.toread.sys.common.validate.Check;
 import com.toread.sys.config.CacheConfig;
 import com.toread.sys.utils.MonitorUtils;
 import org.springframework.beans.BeanUtils;
@@ -51,7 +51,7 @@ public abstract class SimpleTreeServiceImpl<M extends CRUDMapper<T>,T> extends S
             TreeUtils.setAnnotationFieldValue(father,TreeId.class,pId);
             Check.notNull(buildTree().findTreeNode(father),String.format("未找到%s节点",pId));
         }
-        return insert(t);
+        return processResult(insert(t));
     }
 
     /**

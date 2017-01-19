@@ -2,10 +2,10 @@ package com.toread.sys.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
-import com.toread.sys.common.Check;
 import com.toread.sys.common.enums.State;
 import com.toread.sys.common.service.SimpleBaseService;
 import com.toread.sys.common.tree.TreeNode;
+import com.toread.sys.common.validate.Check;
 import com.toread.sys.entity.Department;
 import com.toread.sys.entity.User;
 import com.toread.sys.mapper.UserMapper;
@@ -37,7 +37,7 @@ public class UserServiceImpl extends SimpleBaseService<UserMapper, User,Long> im
     private IUserDepartmentService userDepartmentService;
 
     @Override
-    public boolean updateById(User user) {
+    public Integer updateById(User user) {
         Check.notNull(user.getUserId(),"用户ID不能为空");
         if(StringUtils.hasText(user.getUserPwd())){
             String pwdSHA256 = DigestUtils.sha256Hex(user.getUserPwd());

@@ -1,11 +1,8 @@
 package com.toread.sys;
 
-import com.alibaba.fastjson.JSON;
-import com.toread.sys.entity.User;
 import org.springframework.format.datetime.DateFormatter;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 import static java.util.Calendar.FRIDAY;

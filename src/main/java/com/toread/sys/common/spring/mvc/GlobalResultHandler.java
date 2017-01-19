@@ -42,7 +42,8 @@ public class GlobalResultHandler  implements ResponseBodyAdvice {
         if(restResultMsg!=null){
             restResult.setMsg(restResultMsg.fail());
         }else{
-            String msg = StringUtils.hasText(e.getMessage())?e.getMessage():"操作失败";
+            BusinessException exception = (BusinessException)e;
+            String msg = StringUtils.hasText(exception.getHintMsg())?exception.getHintMsg():"操作失败";
             restResult.setMsg(msg);
         }
         restResult.setOperateResult(RestResult.OperateResult.FAIL);

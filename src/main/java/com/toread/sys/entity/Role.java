@@ -1,10 +1,14 @@
 package com.toread.sys.entity;
 
+import com.toread.sys.common.mybatis.annotation.CTime;
 import com.toread.sys.common.mybatis.annotation.IDSequence;
+import com.toread.sys.common.mybatis.annotation.UTime;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Table(name = "sys_role")
@@ -21,6 +25,7 @@ public class Role {
      * 角色名称
      */
     @Column(name = "role_name")
+    @Size(min = 1,max = 16)
     private String roleName;
 
     /**
@@ -33,12 +38,14 @@ public class Role {
      * 创建时间
      */
     @Column(name = "role_c_time")
+    @CTime
     private Date roleCTime;
 
     /**
      * 修改时间
      */
     @Column(name = "role_u_time")
+    @UTime
     private Date roleUTime;
 
     /**

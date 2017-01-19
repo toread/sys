@@ -1,8 +1,8 @@
 package com.toread.sys.common.tree;
 
-import com.toread.sys.common.Check;
 import com.toread.sys.common.tree.annotation.TreeId;
 import com.toread.sys.common.tree.annotation.TreePid;
+import com.toread.sys.common.validate.Check;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;

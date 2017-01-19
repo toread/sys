@@ -1,5 +1,7 @@
 package com.toread.sys.utils;
 
+import org.apache.commons.lang.StringEscapeUtils;
+
 import java.text.MessageFormat;
 
 /**
@@ -15,6 +17,10 @@ public abstract class FormatUtils {
     public static final String  format(String template,Object... objects ){
         MessageFormat messageFormat = new MessageFormat(template);
         return messageFormat.format(objects);
+    }
+
+    public static final String sqlAllLike(String values){
+        return StringEscapeUtils.escapeSql(format("{0}"+values+"{0}","%"));
     }
 
 }

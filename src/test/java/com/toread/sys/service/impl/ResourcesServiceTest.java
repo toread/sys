@@ -3,12 +3,15 @@ package com.toread.sys.service.impl;
 import com.toread.sys.AccessCtlApplicationTests;
 import com.toread.sys.common.enums.State;
 import com.toread.sys.entity.*;
-import com.toread.sys.service.*;
+import com.toread.sys.service.IResourceService;
+import com.toread.sys.service.IRoleService;
+import com.toread.sys.service.IUserRoleService;
+import com.toread.sys.service.IUserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author  探路者

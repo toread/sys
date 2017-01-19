@@ -9,15 +9,15 @@ import java.util.List;
  * @author 黎志兵
  */
 public interface BaseService<T,ID> {
-    boolean insert(T t);
-    boolean insertSelective(T t);
-    boolean updateById(T t);
-    boolean updateSelectiveById(T t);
-    boolean updateByExample(T t,Object example);
-    boolean updateByExampleSelective(T t,Object example);
-    boolean delete(T t);
-    boolean deleteById(ID id);
-    boolean deleteByExample(Object example);
+    Integer insert(T t);
+    Integer insertSelective(T t);
+    Integer updateById(T t);
+    Integer updateSelectiveById(T t);
+    Integer updateByExample(T t,Object example);
+    Integer updateByExampleSelective(T t,Object example);
+    Integer delete(T t);
+    Integer deleteById(ID id);
+    Integer deleteByExample(Object example);
     List<T> selectAll();
     List<T> select(T record);
     T selectOne(T record);

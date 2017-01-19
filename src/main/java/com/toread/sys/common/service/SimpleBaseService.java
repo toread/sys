@@ -15,48 +15,48 @@ public class SimpleBaseService<M extends CRUDMapper<T>,T,ID> implements  BaseSer
     @Autowired
     protected M mapper;
     @Override
-    public boolean insert(T t) {
-       return processResult(mapper.insert(t));
+    public Integer insert(T t) {
+       return mapper.insert(t);
     }
 
     @Override
-    public boolean insertSelective(T t) {
-        return processResult(mapper.insertSelective(t));
+    public Integer insertSelective(T t) {
+        return mapper.insertSelective(t);
     }
 
     @Override
-    public boolean updateById(T t) {
-        return processResult(mapper.updateByPrimaryKey(t));
+    public Integer updateById(T t) {
+        return mapper.updateByPrimaryKey(t);
     }
 
     @Override
-    public boolean updateSelectiveById(T t) {
-        return processResult(mapper.updateByPrimaryKeySelective(t));
+    public Integer updateSelectiveById(T t) {
+        return mapper.updateByPrimaryKeySelective(t);
     }
 
     @Override
-    public boolean updateByExample(T t, Object example) {
-        return processResult(mapper.updateByExample(t,example));
+    public Integer updateByExample(T t, Object example) {
+        return mapper.updateByExample(t,example);
     }
 
     @Override
-    public boolean updateByExampleSelective(T t, Object example) {
-        return processResult(mapper.updateByExampleSelective(t,example));
+    public Integer updateByExampleSelective(T t, Object example) {
+        return mapper.updateByExampleSelective(t,example);
     }
 
     @Override
-    public boolean delete(T t) {
-        return processResult(mapper.delete(t));
+    public Integer delete(T t) {
+        return mapper.delete(t);
     }
 
     @Override
-    public boolean deleteById(ID id) {
-        return processResult(mapper.deleteByPrimaryKey(id));
+    public Integer deleteById(ID id) {
+        return mapper.deleteByPrimaryKey(id);
     }
 
     @Override
-    public boolean deleteByExample(Object example) {
-        return processResult(mapper.deleteByExample(example));
+    public Integer deleteByExample(Object example) {
+        return mapper.deleteByExample(example);
     }
 
     @Override

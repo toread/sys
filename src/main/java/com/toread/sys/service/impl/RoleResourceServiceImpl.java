@@ -1,7 +1,7 @@
 package com.toread.sys.service.impl;
 
-import com.toread.sys.common.Check;
 import com.toread.sys.common.service.SimpleBaseService;
+import com.toread.sys.common.validate.Check;
 import com.toread.sys.entity.RoleResource;
 import com.toread.sys.mapper.RoleResourceMapper;
 import com.toread.sys.service.IResourceService;
@@ -31,7 +31,7 @@ public class RoleResourceServiceImpl extends SimpleBaseService<RoleResourceMappe
         RoleResource roleResources = new RoleResource();
         roleResources.setResId(resourcesId);
         roleResources.setRoleId(roleId);
-        return insert(roleResources);
+        return processResult(insert(roleResources));
     }
 
     @Override
@@ -40,6 +40,6 @@ public class RoleResourceServiceImpl extends SimpleBaseService<RoleResourceMappe
         RoleResource roleResources = new RoleResource();
         roleResources.setResId(resourcesId);
         roleResources.setRoleId(roleId);
-        return delete(roleResources);
+        return processResult(delete(roleResources));
     }
 }

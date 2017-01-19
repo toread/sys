@@ -5,8 +5,6 @@ import com.toread.sys.entity.Department;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.junit.Assert.*;
-
 /**
  * @author 黎志兵
  */

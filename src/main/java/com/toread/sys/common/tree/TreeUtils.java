@@ -1,6 +1,6 @@
 package com.toread.sys.common.tree;
 
-import com.toread.sys.common.Check;
+import com.toread.sys.common.validate.Check;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;

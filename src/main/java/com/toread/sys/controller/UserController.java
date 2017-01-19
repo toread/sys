@@ -2,9 +2,9 @@ package com.toread.sys.controller;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
-import com.toread.sys.common.Check;
 import com.toread.sys.common.data.ShieldBeanProperty;
 import com.toread.sys.common.spring.mvc.RestResultMsg;
+import com.toread.sys.common.validate.Check;
 import com.toread.sys.config.APIRout;
 import com.toread.sys.entity.User;
 import com.toread.sys.service.IUserService;

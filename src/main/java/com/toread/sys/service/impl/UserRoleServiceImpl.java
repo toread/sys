@@ -1,7 +1,7 @@
 package com.toread.sys.service.impl;
 
-import com.toread.sys.common.Check;
 import com.toread.sys.common.service.SimpleBaseService;
+import com.toread.sys.common.validate.Check;
 import com.toread.sys.entity.UserRole;
 import com.toread.sys.mapper.UserRoleMapper;
 import com.toread.sys.service.IRoleService;
@@ -31,7 +31,7 @@ public class UserRoleServiceImpl extends SimpleBaseService<UserRoleMapper, UserR
         UserRole userRole = new UserRole();
         userRole.setUserId(userId);
         userRole.setRoleId(roleId);
-        return insert(userRole);
+        return processResult(insert(userRole));
     }
 
     @Override
@@ -40,6 +40,6 @@ public class UserRoleServiceImpl extends SimpleBaseService<UserRoleMapper, UserR
         UserRole userRole = new UserRole();
         userRole.setUserId(userId);
         userRole.setRoleId(roleId);
-        return delete(userRole);
+        return processResult(delete(userRole));
     }
 }
