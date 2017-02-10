@@ -8,7 +8,7 @@ import com.toread.sys.common.tree.TreeNode;
 import com.toread.sys.common.tree.TreeUtils;
 import com.toread.sys.common.tree.annotation.TreeId;
 import com.toread.sys.common.tree.annotation.TreePid;
-import com.toread.sys.common.validate.Check;
+import com.toread.sys.common.validator.Check;
 import com.toread.sys.config.CacheConfig;
 import com.toread.sys.utils.MonitorUtils;
 import org.springframework.beans.BeanUtils;

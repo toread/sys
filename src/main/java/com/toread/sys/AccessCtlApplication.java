@@ -1,7 +1,5 @@
 package com.toread.sys;
 
-import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.toread.sys.common.mybatis.CRUDMapper;
 import com.toread.sys.common.spring.SpringContext;
 import org.hibernate.validator.HibernateValidator;
@@ -16,20 +14,14 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ConversionServiceFactoryBean;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.http.MediaType;
-import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 @SpringBootApplication(scanBasePackages = "com.toread.sys")
-@MapperScan(basePackages = "com.toread.sys.mapper",markerInterface = CRUDMapper.class)
+@MapperScan(basePackages = {"com.toread.sys.mapper"}, markerInterface = CRUDMapper.class)
 @EnableCaching
-@EnableWebMvc
 public class AccessCtlApplication   extends SpringBootServletInitializer implements ApplicationContextAware {
 
 	public AccessCtlApplication() {
@@ -41,15 +33,7 @@ public class AccessCtlApplication   extends SpringBootServletInitializer impleme
 		SpringApplication.run(AccessCtlApplication.class, args);
 	}
 
-	@Bean
-	public HttpMessageConverter FastJsonHttpMessageConverter(){
-		FastJsonHttpMessageConverter  httpMessageConverter =  new  FastJsonHttpMessageConverter();
-		List<MediaType> support = new  ArrayList<MediaType>();
-		support.add(MediaType.APPLICATION_JSON);
-		httpMessageConverter.setSupportedMediaTypes(support);
-		httpMessageConverter.getFastJsonConfig().setSerializerFeatures(SerializerFeature.WriteMapNullValue,SerializerFeature.SortField);
-		return httpMessageConverter;
-	}
+
 
 	@Bean
 	public  LocalValidatorFactoryBean localValidatorFactoryBean(ResourceBundleMessageSource resourceBundleMessageSource){
@@ -58,13 +42,15 @@ public class AccessCtlApplication   extends SpringBootServletInitializer impleme
 		factoryBean.setValidationMessageSource(resourceBundleMessageSource);
 		return factoryBean;
 	}
-
 	@Bean
 	public ResourceBundleMessageSource resourceBundleMessageSource(){
 		ResourceBundleMessageSource resourceBundleMessageSource = new  ResourceBundleMessageSource();
-		resourceBundleMessageSource.setBasename("messages/message");
-		resourceBundleMessageSource.setDefaultEncoding("UTF-8");
-		return  resourceBundleMessageSource;
+        //自定义的错误内容
+        resourceBundleMessageSource.addBasenames("messages/message");
+        resourceBundleMessageSource.addBasenames("validationExtMessages/validationExtMessages");
+        resourceBundleMessageSource.addBasenames("org/hibernate/validator/ValidationMessages");
+        resourceBundleMessageSource.setDefaultEncoding("UTF-8");
+        return  resourceBundleMessageSource;
 	}
 
 	@Bean

@@ -1,10 +1,13 @@
 package com.toread.sys.entity;
 
 import com.toread.sys.common.mybatis.annotation.IDSequence;
+import com.toread.sys.common.validator.constraints.ValidState;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Table(name = "sys_resource")
@@ -15,30 +18,35 @@ public class Resource {
     @Id
     @Column(name = "res_id")
     @IDSequence
+    @NotNull(groups = IDNotNull.class)
     private Long resId;
 
     /**
      * 资源类型
      */
     @Column(name = "res_type")
+    @NotNull
     private String resType;
 
     /**
      * 资源名称
      */
     @Column(name = "res_name")
+    @Size(min = 1, max = 16)
     private String resName;
 
     /**
      * 资源值
      */
     @Column(name = "res_val")
+    @Size(min = 1, max = 256)
     private String resVal;
 
     /**
      * 资源状态
      */
     @Column(name = "res_state")
+    @ValidState
     private Integer resState;
 
     /**
@@ -56,7 +64,7 @@ public class Resource {
     /**
      * 获取资源uuid
      *
-     * @return res_id - 资源uuid
+     * @return res_id - 资源id
      */
     public Long getResId() {
         return resId;
@@ -178,4 +186,9 @@ public class Resource {
     public void setResUTime(Date resUTime) {
         this.resUTime = resUTime;
     }
+
+    public static interface IDNotNull {
+    }
+
+    ;
 }

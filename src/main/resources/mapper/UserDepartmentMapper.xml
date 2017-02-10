@@ -11,9 +11,4 @@
     <result column="c_time" jdbcType="TIMESTAMP" property="cTime" />
   </resultMap>
 
-	<!-- 通用查询结果列-->
-	<sql id="Base_Column_List">
-		 id, user_id AS userId, dpt_id AS dptId, c_time AS cTime
-	</sql>
-
 </mapper>

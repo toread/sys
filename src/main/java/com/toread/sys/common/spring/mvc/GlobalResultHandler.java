@@ -1,7 +1,7 @@
 package com.toread.sys.common.spring.mvc;
 
 import com.toread.sys.common.exception.BusinessException;
-import com.toread.sys.common.validate.ArgumentNotValidException;
+import com.toread.sys.common.validator.ArgumentNotValidException;
 import org.apache.log4j.Logger;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.AnnotationUtils;

@@ -2,7 +2,7 @@ package com.toread.sys.common.tree;
 
 import com.toread.sys.common.tree.annotation.TreeId;
 import com.toread.sys.common.tree.annotation.TreePid;
-import com.toread.sys.common.validate.Check;
+import com.toread.sys.common.validator.Check;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
@@ -16,9 +16,24 @@ import static com.toread.sys.common.tree.TreeUtils.getAnnotationFieldValues;
  * @author toread
  */
 public class SimpleTree<T> implements Tree<T> {
+    private static final Logger LOG = LoggerFactory.getLogger(SimpleTree.class);
     protected  List<T> treeData;
     protected  TreeNode<T> rootNode;
-    private static final Logger LOG = LoggerFactory.getLogger(SimpleTree.class);
+
+    /**
+     * @param tList
+     * @return
+     */
+    private static <T> T findRoot(Collection<T> tList, Object rootId) {
+        for (T t : tList) {
+            Object id = getAnnotationFieldValues(t, TreeId.class);
+            if (rootId.equals(id)) {
+                return t;
+            }
+        }
+        String errorMsg = "未找到含有" + rootId + "根节点";
+        throw new TreeException(errorMsg);
+    }
 
     @Override
     public synchronized void  buildTree(Collection<T> trees, Object rootId) {
@@ -60,22 +75,6 @@ public class SimpleTree<T> implements Tree<T> {
             }
         }
     }
-
-
-    /**
-     *
-     * @param tList
-     * @return
-     */
-    private static <T> T findRoot(Collection<T> tList, Object rootId){
-        for (T t : tList) {
-            Object id = getAnnotationFieldValues(t,TreeId.class);
-            if(rootId.equals(id)){return t;}
-        }
-        String errorMsg = "未找到含有"+rootId+"根节点";
-        throw  new TreeException(errorMsg);
-    }
-
 
     @Override
     public TreeNode<T> getRoot() {

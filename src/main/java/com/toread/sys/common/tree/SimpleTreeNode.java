@@ -3,7 +3,7 @@ package com.toread.sys.common.tree;
 import com.toread.sys.common.tree.annotation.TreeId;
 import com.toread.sys.common.tree.annotation.TreePid;
 import com.toread.sys.common.tree.annotation.TreeText;
-import com.toread.sys.common.validate.Check;
+import com.toread.sys.common.validator.Check;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -67,13 +67,13 @@ public class SimpleTreeNode<T> implements TreeNode<T> {
     }
 
     @Override
-    public void setFather(TreeNode<T> t) {
-        this.fatherNode = t;
+    public TreeNode getFather() {
+        return this.fatherNode;
     }
 
     @Override
-    public TreeNode getFather() {
-        return this.fatherNode;
+    public void setFather(TreeNode<T> t) {
+        this.fatherNode = t;
     }
 
     @Override

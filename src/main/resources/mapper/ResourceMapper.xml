@@ -14,11 +14,6 @@
     <result column="res_u_time" jdbcType="TIMESTAMP" property="resUTime" />
   </resultMap>
 
-	<!-- 通用查询结果列-->
-	<sql id="Base_Column_List">
-		 res_id AS resId, res_type AS resType, res_name AS resName, res_val AS resVal, res_state AS resState, res_c_time AS resCTime, res_u_time AS resUTime
-	</sql>
-
 	<!-- 查询角色拥有的资源-->
 	<select id="queryRoleResources" resultType="resource">
         SELECT

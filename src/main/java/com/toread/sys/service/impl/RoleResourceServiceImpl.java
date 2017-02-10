@@ -1,7 +1,7 @@
 package com.toread.sys.service.impl;
 
 import com.toread.sys.common.service.SimpleBaseService;
-import com.toread.sys.common.validate.Check;
+import com.toread.sys.common.validator.Check;
 import com.toread.sys.entity.RoleResource;
 import com.toread.sys.mapper.RoleResourceMapper;
 import com.toread.sys.service.IResourceService;

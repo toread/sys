@@ -1,8 +1,11 @@
 package com.toread.sys.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import com.toread.sys.common.enums.State;
 import com.toread.sys.common.service.SimpleBaseService;
-import com.toread.sys.common.validate.Check;
+import com.toread.sys.common.validator.Check;
+import com.toread.sys.common.validator.Valid;
 import com.toread.sys.entity.Resource;
 import com.toread.sys.entity.Role;
 import com.toread.sys.mapper.ResourceMapper;
@@ -24,7 +27,8 @@ import java.util.Set;
  */
 @Service
 public class ResourceServiceImpl extends SimpleBaseService<ResourceMapper, Resource,Long> implements IResourceService {
-
+    @Autowired
+    protected Valid valid;
     @Autowired
     private IRoleService roleService;
     @Autowired
@@ -54,5 +58,30 @@ public class ResourceServiceImpl extends SimpleBaseService<ResourceMapper, Resou
         Check.notNull(roleId,"角色Id不能为空");
         Check.notNull(state,"用户状态不能为空");
         return mapper.queryRoleResources(roleId,state.code());
+    }
+
+    @Override
+    public Integer addResource(Resource resource) {
+        valid.valid(resource);
+        Check.notNull(State.getState(resource.getResState()), "状态不正确");
+        return insert(resource);
+    }
+
+    @Override
+    public Integer deleteResource(Resource resource) {
+        valid.valid(resource, Resource.IDNotNull.class);
+        return deleteById(resource.getResId());
+    }
+
+    @Override
+    public Integer updateResource(Resource resource) {
+        valid.valid(resource, Resource.IDNotNull.class);
+        valid.validateNotNullProperty(resource);
+        return updateSelectiveById(resource);
+    }
+
+    @Override
+    public Page<Resource> queryResources(PageInfo<Resource> page, Resource user) {
+        return null;
     }
 }

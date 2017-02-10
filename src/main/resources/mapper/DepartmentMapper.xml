@@ -11,10 +11,4 @@
     <result column="dpt_type" jdbcType="VARCHAR" property="dptType" />
     <result column="dpt_state" jdbcType="VARCHAR" property="dptState"/>
   </resultMap>
-
-	<!-- 通用查询结果列-->
-	<sql id="Base_Column_List">
-		 dpt_id AS dptId, dpt_pid AS dptPid, dpt_name AS dptName, dpt_type AS dptType
-	</sql>
-
 </mapper>

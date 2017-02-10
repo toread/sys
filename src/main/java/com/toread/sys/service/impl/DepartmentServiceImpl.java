@@ -2,7 +2,7 @@ package com.toread.sys.service.impl;
 
 import com.toread.sys.common.enums.State;
 import com.toread.sys.common.tree.service.SimpleTreeServiceImpl;
-import com.toread.sys.common.validate.Check;
+import com.toread.sys.common.validator.Check;
 import com.toread.sys.config.CacheConfig;
 import com.toread.sys.entity.Department;
 import com.toread.sys.mapper.DepartmentMapper;

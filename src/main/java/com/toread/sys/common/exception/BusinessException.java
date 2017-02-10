@@ -1,6 +1,5 @@
 package com.toread.sys.common.exception;
 
-import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 /**

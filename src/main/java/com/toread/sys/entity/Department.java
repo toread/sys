@@ -4,6 +4,7 @@ import com.toread.sys.common.mybatis.annotation.IDSequence;
 import com.toread.sys.common.tree.annotation.TreeId;
 import com.toread.sys.common.tree.annotation.TreePid;
 import com.toread.sys.common.tree.annotation.TreeText;
+import com.toread.sys.common.validator.constraints.ValidState;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.Column;
@@ -14,13 +15,6 @@ import javax.validation.constraints.Size;
 
 @Table(name = "sys_department")
 public class Department {
-	public Department(Long dptId) {
-		this.dptId = dptId;
-	}
-
-	public Department() {
-	}
-
 	/**
      * 部门主键
      */
@@ -29,36 +23,39 @@ public class Department {
 	@TreeId
     @IDSequence
     private Long dptId;
-
     /**
      * 父部门id
      */
     @Column(name = "dpt_pid")
 	@TreePid
-    @NotNull(message = "{department.dpt_pid.notnull.message}")
+    @NotNull
     private Long dptPid;
-
     /**
      * 部门名称
      */
     @Column(name = "dpt_name")
 	@TreeText
-    @Size(min = 1,max = 32,message = "{department.dptname.size.message}")
+    @Size(min = 1, max = 32)
     private String dptName;
-
     /**
      * 部门类型
      */
     @Column(name = "dpt_type")
-    @NotBlank(message = "{department.dptType.notblank.message}")
+    @NotBlank
     private String dptType;
-
     /**
      * 部门状态
      */
     @Column(name = "dpt_state")
-    @NotNull(message = "{department.dptState.notnull.message}")
+    @ValidState
     private Integer dptState;
+
+    public Department(Long dptId) {
+        this.dptId = dptId;
+    }
+
+    public Department() {
+    }
 
     public Integer getDptState() {
         return dptState;

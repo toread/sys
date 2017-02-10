@@ -1,4 +1,4 @@
-package com.toread.sys.common.validate;
+package com.toread.sys.common.validator;
 
 import com.toread.sys.common.spring.mvc.RestResult;
 import org.springframework.util.CollectionUtils;

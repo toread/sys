@@ -1,1 +1,2 @@
-    datasource:
+druid:
+  url: jdbc:mysql://100.73.12.50:3306/access_ctl?characterEncoding=utf8

@@ -32,6 +32,13 @@ public interface IUserService extends BaseService<User,Long> {
     boolean userLogin(User user);
 
     /**
+     * 根据用户代码查询有效的用户信息
+     * @param userCode
+     * @return
+     */
+    User queryEnableUserByUserName(String userCode);
+
+    /**
      * 查询用户信息
      * @param user
      * @return

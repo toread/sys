@@ -5,7 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.toread.sys.common.enums.State;
 import com.toread.sys.common.service.SimpleBaseService;
 import com.toread.sys.common.tree.TreeNode;
-import com.toread.sys.common.validate.Check;
+import com.toread.sys.common.validator.Check;
 import com.toread.sys.entity.Department;
 import com.toread.sys.entity.User;
 import com.toread.sys.mapper.UserMapper;
@@ -35,6 +35,7 @@ public class UserServiceImpl extends SimpleBaseService<UserMapper, User,Long> im
 
     @Autowired
     private IUserDepartmentService userDepartmentService;
+
 
     @Override
     public Integer updateById(User user) {
@@ -84,15 +85,23 @@ public class UserServiceImpl extends SimpleBaseService<UserMapper, User,Long> im
     @Override
     public boolean userLogin(User user) {
         Check.notNull(user,"用戶不能为空");
-        Check.notNull(user.getUserCode(),"手机号码不能为空");
-        Check.notNull(user.getUserPwd(),"手机号码不能为空");
+        Check.notNull(user.getUserCode(), "用户代码不能为空");
+        Check.notNull(user.getUserPwd(), "用户密码不能为空");
         String pwdSHA256 = DigestUtils.sha256Hex(user.getUserPwd());
         User query = new User();
-        user.setUserCode(user.getUserCode());
+        query.setUserCode(user.getUserCode());
         User fromDB = selectOne(query);
         Check.notNull(fromDB,"用户未注册");
         Check.isTrue(pwdSHA256.equals(fromDB.getUserPwd()),"密码错误");
         return true;
+    }
+
+    @Override
+    public User queryEnableUserByUserName(String userCode) {
+        User user = new User();
+        user.setUserState(State.ENABLED.code());
+        user.setUserCode(userCode);
+        return selectOne(user);
     }
 
     @Override

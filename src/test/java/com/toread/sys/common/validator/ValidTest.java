@@ -1,4 +1,4 @@
-package com.toread.sys.common.validate;
+package com.toread.sys.common.validator;
 
 import com.toread.sys.AccessCtlApplicationTests;
 import com.toread.sys.entity.Department;
@@ -21,5 +21,13 @@ public class ValidTest extends AccessCtlApplicationTests {
     @Test
     public void validateProperty() throws Exception {
 
+    }
+
+
+    @Test
+    public void validateNotNullProperty() throws Exception {
+        Department department = new Department();
+        department.setDptState(11);
+        valid.validateNotNullProperty(department);
     }
 }

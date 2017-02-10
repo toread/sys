@@ -25,40 +25,42 @@
             <!--<generatedKey column="id"  sqlStatement="Mysql" />-->
         <!--</table>-->
 
-        <table tableName="sys_menu"  domainObjectName="Menu"  mapperName="MenuMapper" >
-            <generatedKey column="menu_id"  sqlStatement="Mysql" />
-        </table>
-        <table tableName="sys_resouce_menu"  domainObjectName="ResouceMenu"  mapperName="ResouceMenuMapper" >
-            <generatedKey column="id"  sqlStatement="Mysql" />
-        </table>
-
-        <table tableName="sys_resource"  domainObjectName="Resource"  mapperName="ResourceMapper" >
-            <generatedKey column="id"  sqlStatement="Mysql" />
-        </table>
-
-        <table tableName="sys_resouce_menu"  domainObjectName="ResouceMenu"  mapperName="ResouceMenuMapper" >
-            <generatedKey column="res_id"  sqlStatement="Mysql" />
-        </table>
-        <table tableName="sys_resouce_menu"  domainObjectName="ResouceMenu"  mapperName="ResouceMenuMapper" >
-            <generatedKey column="res_id"  sqlStatement="Mysql" />
-        </table>
-        <table tableName="sys_role"  domainObjectName="Role"  mapperName="RoleMenuMapper" >
-            <generatedKey column="res_id"  sqlStatement="Mysql" />
-        </table>
-        <table tableName="sys_role_resource"  domainObjectName="RoleResource"  mapperName="RoleResourceMenuMapper" >
-            <generatedKey column="id"  sqlStatement="Mysql" />
-        </table>
-        <table tableName="sys_role_resource"  domainObjectName="RoleResource"  mapperName="RoleResourceMenuMapper" >
-            <generatedKey column="id"  sqlStatement="Mysql" />
-        </table>
-        <table tableName="sys_user_department"  domainObjectName="UserDepartment"  mapperName="UserDepartmentMapper" >
-            <generatedKey column="id"  sqlStatement="Mysql" />
-        </table>
-        <table tableName="sys_user_role"  domainObjectName="UserRole"  mapperName="UserRoleMapper" >
-            <generatedKey column="id"  sqlStatement="Mysql" />
-        </table>
-        <!--<table tableName="sys_user"  domainObjectName="User"  mapperName="UserMapper" >-->
-            <!--<generatedKey column="dpt_id"  sqlStatement="Mysql" />-->
+        <!--<table tableName="sys_menu"  domainObjectName="Menu"  mapperName="MenuMapper" >-->
+        <!--<generatedKey column="menu_id"  sqlStatement="Mysql" />-->
         <!--</table>-->
+        <!--<table tableName="sys_resouce_menu"  domainObjectName="ResouceMenu"  mapperName="ResouceMenuMapper" >-->
+        <!--<generatedKey column="id"  sqlStatement="Mysql" />-->
+        <!--</table>-->
+
+        <!--<table tableName="sys_resource"  domainObjectName="Resource"  mapperName="ResourceMapper" >-->
+        <!--<generatedKey column="id"  sqlStatement="Mysql" />-->
+        <!--</table>-->
+
+        <!--<table tableName="sys_resouce_menu"  domainObjectName="ResouceMenu"  mapperName="ResouceMenuMapper" >-->
+        <!--<generatedKey column="res_id"  sqlStatement="Mysql" />-->
+        <!--</table>-->
+        <!--<table tableName="sys_resouce_menu"  domainObjectName="ResouceMenu"  mapperName="ResouceMenuMapper" >-->
+        <!--<generatedKey column="res_id"  sqlStatement="Mysql" />-->
+        <!--</table>-->
+        <!---->
+        <!--<table tableName="sys_role_resource"  domainObjectName="RoleResource"  mapperName="RoleResourceMenuMapper" >-->
+        <!--<generatedKey column="id"  sqlStatement="Mysql" />-->
+        <!--</table>-->
+        <!--<table tableName="sys_role_resource"  domainObjectName="RoleResource"  mapperName="RoleResourceMenuMapper" >-->
+        <!--<generatedKey column="id"  sqlStatement="Mysql" />-->
+        <!--</table>-->
+        <!--<table tableName="sys_user_department"  domainObjectName="UserDepartment"  mapperName="UserDepartmentMapper" >-->
+        <!--<generatedKey column="id"  sqlStatement="Mysql" />-->
+        <!--</table>-->
+        <!--<table tableName="sys_user_role"  domainObjectName="UserRole"  mapperName="UserRoleMapper" >-->
+        <!--<generatedKey column="id"  sqlStatement="Mysql" />-->
+        <!--</table>-->
+        <!--<table tableName="sys_role"  domainObjectName="Role"  mapperName="RoleMapper" >-->
+        <!--<generatedKey column="res_id"  sqlStatement="Mysql" />-->
+        <!--</table>-->
+        <table tableName="sys_user"
+               domainObjectName="User"
+               mapperName="UserMapper">
+        </table>
     </context>
 </generatorConfiguration>

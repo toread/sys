@@ -14,10 +14,4 @@
     <result column="menu_c_time" jdbcType="TIMESTAMP" property="menuCTime" />
     <result column="menu_u_time" jdbcType="TIMESTAMP" property="menuUTime" />
   </resultMap>
-
-	<!-- 通用查询结果列-->
-	<sql id="Base_Column_List">
-		 menu_id AS menuId, menu_name AS menuName, menu_icon AS menuIcon, menu_pid AS menuPid, menu_state AS menuState, menu_order AS menuOrder, menu_c_time AS menuCTime, menu_u_time AS menuUTime
-	</sql>
-
 </mapper>
