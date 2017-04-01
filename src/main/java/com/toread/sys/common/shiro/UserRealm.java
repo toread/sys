@@ -31,15 +31,12 @@ public class UserRealm extends AuthorizingRealm {
     private IRoleService iRoleService;
     @Autowired
     private IResourceService resourceService;
-
     @Autowired
     private IUserService userService;
-
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         String username = (String) principalCollection.getPrimaryPrincipal();
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        info.setStringPermissions(null);
         User user = userService.queryEnableUserByUserName(username);
         Check.notNull(user, FormatUtils.format("{0}用户不存在", username));
         List<Role> roles = iRoleService.queryUserRole(user.getUserId(), State.ENABLED);
@@ -48,13 +45,12 @@ public class UserRealm extends AuthorizingRealm {
             roleIds.add(role.getRoleId().toString());
         }
         info.addRoles(roleIds);
-        Set<Resource> resources = resourceService.queryUserResources(user.getUserId(), State.ENABLED);
+        Set<Resource> resources = resourceService.queryUserEnableResources(user.getUserId());
         Set<String> hashSet = new HashSet<>(resources.size());
         for (Resource resource : resources) {
             hashSet.add(resource.getResVal());
         }
         info.addStringPermissions(hashSet);
-        info.addStringPermission("/user/add");
         return info;
     }
 

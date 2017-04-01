@@ -28,7 +28,5 @@ public abstract class Generator {
         myBatisGenerator.generate(null);
     }
 
-    public static void main(String[] args) throws InterruptedException, SQLException, InvalidConfigurationException, XMLParserException, IOException {
-        Generator.generator();
-    }
+
 }

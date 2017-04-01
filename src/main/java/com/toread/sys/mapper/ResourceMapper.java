@@ -5,6 +5,7 @@ import com.toread.sys.entity.Resource;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -20,4 +21,12 @@ public interface ResourceMapper extends CRUDMapper<Resource> {
      * @return
      */
     List<Resource> queryRoleResources(@Param("roleId")Long roleId, @Param("state")Integer state);
+
+    /**
+     * 查询用户有效的资源
+     *
+     * @param roleId
+     * @return
+     */
+    Set<Resource> queryUserEnableResources(@Param("userId") Long roleId);
 }

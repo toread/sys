@@ -12,14 +12,16 @@ import static java.util.Calendar.FRIDAY;
  */
 public class Main {
     public static void main(String[] args) {
-        DateFormatter date = new DateFormatter("YYYY-MM-DD");
+        DateFormatter date = new DateFormatter("YYYY-MM-dd");
         Calendar calendar = Calendar.getInstance();
-        calendar.set(2016,11,0);
-        for(int day=0;day<30;day++){
-            calendar.add(Calendar.DAY_OF_YEAR,1);
-            if(calendar.get(Calendar.DAY_OF_WEEK)!= FRIDAY||calendar.get(Calendar.DAY_OF_WEEK)!= Calendar.SATURDAY){
+        calendar.set(2017, 1, 0);
+        for (int day = 0; day < 35; day++) {
+            if (!(calendar.get(Calendar.DAY_OF_WEEK) == FRIDAY
+                    || calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY
+                    || calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY)) {
                 System.out.println(date.print(calendar.getTime(), Locale.CHINA));
             }
+            calendar.add(Calendar.DAY_OF_YEAR, 1);
         }
 
     }

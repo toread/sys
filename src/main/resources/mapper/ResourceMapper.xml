@@ -25,4 +25,17 @@
             rl.role_id = #{roleId} AND re.res_state = #{state}
 		</where>
 	</select>
+
+    <select id="queryUserEnableResources" resultType="resource">
+        SELECT
+        re.res_id AS resId, re.res_type AS resType, re.res_name AS resName,
+        re.res_val AS resVal, re.res_state AS resState, re.res_c_time AS resCTime,
+        re.res_u_time AS resUTime
+        FROM sys_resource re LEFT JOIN sys_role_resource rl ON re.res_id = rl.res_id
+        LEFT JOIN sys_user_role usrl on user_id=usrl.user_id
+        LEFT JOIN sys_role role on usrl.role_id = role.role_id
+        <where>
+            user_id =#{userId} and role.role_state = 1 and re.res_state = 1;
+        </where>
+    </select>
 </mapper>

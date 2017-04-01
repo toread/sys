@@ -57,8 +57,6 @@ public class DruidAutoConfiguration {
         dataSource.setTestWhileIdle(properties.getTestWhileIdle());
         dataSource.setTestOnBorrow(properties.getTestOnBorrow());
         dataSource.setTestOnReturn(properties.getTestOnReturn());
-
-
         dataSource.setPoolPreparedStatements(properties.getPoolPreparedStatements());
         dataSource.setMaxOpenPreparedStatements(properties.getMaxOpenPreparedStatements());
         dataSource.setDbType(properties.getDbType());

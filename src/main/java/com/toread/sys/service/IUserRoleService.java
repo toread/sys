@@ -11,17 +11,15 @@ import com.toread.sys.entity.UserRole;
 public interface IUserRoleService extends BaseService<UserRole,Long> {
     /**
      * 绑定角色
-     * @param userId
-     * @param roleId
+     * @param userRole
      * @return
      */
-    boolean bindRole(Long userId,Long roleId);
+    boolean bindRole(UserRole userRole);
 
     /**
      * 解除角色
-     * @param userId
-     * @param roleId
+     * @param userRole
      * @return
      */
-    boolean unBindRole(Long userId,Long roleId);
+    boolean unBindRole(UserRole userRole);
 }

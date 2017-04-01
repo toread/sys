@@ -16,25 +16,23 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
 /**
  * @author toread
  */
-@Controller
+@RestController
 public class UserController {
 
     @Autowired
     private IUserService userService;
 
     @RequestMapping(method = {RequestMethod.POST},value = APIRout.UserAPI.ADD)
-    @ResponseBody
     public void addUser(@RequestBody Map<String,Object> value){
         User user = MapBeanUtils.mapToBean(value,User.class);
         Check.notNull(value.get("departmentId"),"departmentId不能为空");
@@ -42,19 +40,16 @@ public class UserController {
     }
 
     @RequestMapping(method = {RequestMethod.POST},value = APIRout.UserAPI.DELETE)
-    @ResponseBody
     public void deleteUser(@RequestBody User userId){
         userService.deleteUser(userId);
     }
 
     @RequestMapping(method = {RequestMethod.POST},value = APIRout.UserAPI.UPDATE)
-    @ResponseBody
     public void updateUser(@RequestBody User userId){
         userService.updateById(userId);
     }
 
     @RequestMapping(method = {RequestMethod.POST},value = APIRout.UserAPI.QUERY)
-    @ResponseBody
     @RestResultMsg
     public PageInfo<User> queryUser(@RequestBody Map<String,Object> maps){
         User user = MapBeanUtils.mapToBean(maps,User.class);
@@ -64,7 +59,6 @@ public class UserController {
     }
 
     @RequestMapping(method = {RequestMethod.POST}, value = APIRout.UserAPI.LOGIN)
-    @ResponseBody
     public void login(@RequestBody User user) {
         UsernamePasswordToken upt = new UsernamePasswordToken(user.getUserCode(), user.getUserPwd());
         Subject subject = SecurityUtils.getSubject();
@@ -76,7 +70,6 @@ public class UserController {
     }
 
     @RequestMapping(method = {RequestMethod.POST}, value = APIRout.UserAPI.LOGOUT)
-    @ResponseBody
     public void logout() {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();

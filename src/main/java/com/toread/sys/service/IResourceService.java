@@ -17,10 +17,9 @@ public interface IResourceService extends BaseService<Resource, Long> {
     /**
      * 获取用户所有资源
      * @param userId 用户ID
-     * @param state  资源状态
      * @return
      */
-    Set<Resource> queryUserResources(Long userId, State state);
+    Set<Resource> queryUserEnableResources(Long userId);
 
     /**
      * 判断用户是否可以访问资源

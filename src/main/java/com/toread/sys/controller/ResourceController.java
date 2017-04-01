@@ -6,7 +6,9 @@ import com.toread.sys.common.spring.mvc.RestResultMsg;
 import com.toread.sys.common.validator.Check;
 import com.toread.sys.config.APIRout;
 import com.toread.sys.entity.Resource;
+import com.toread.sys.entity.UserRole;
 import com.toread.sys.service.IResourceService;
+import com.toread.sys.service.IUserRoleService;
 import com.toread.sys.utils.MapBeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,9 +23,10 @@ import java.util.Map;
  */
 @RestController
 public class ResourceController {
-
     @Autowired
     private IResourceService resourceService;
+    @Autowired
+    private IUserRoleService userRoleService;
 
     @RequestMapping(method = {RequestMethod.POST}, value = APIRout.ResourceAPI.ADD)
     public void addResource(@RequestBody Map<String, Object> value) {
@@ -48,5 +51,15 @@ public class ResourceController {
         PageInfo page = MapBeanUtils.mapToBean(maps, PageInfo.class);
         Page<Resource> ResourcePage = resourceService.queryResources(page, resource);
         return new PageInfo<Resource>(ResourcePage);
+    }
+
+    @RequestMapping(method = {RequestMethod.POST}, value = APIRout.ResourceAPI.BIND_ROLE_RESOURCE)
+    public void bindRoleResource(UserRole userRole) {
+        userRoleService.bindRole(userRole);
+    }
+
+    @RequestMapping(method = {RequestMethod.POST}, value = APIRout.ResourceAPI.UN_BIND_ROLE_RESOURCE)
+    public void unBindRoleResource(UserRole userRole) {
+        userRoleService.unBindRole(userRole);
     }
 }

@@ -5,6 +5,7 @@ import com.toread.sys.common.mybatis.annotation.IDSequence;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Table(name = "sys_user_role")
@@ -20,12 +21,14 @@ public class UserRole {
      * 用户uuid
      */
     @Column(name = "user_id")
+    @NotNull
     private Long userId;
 
     /**
      * 角色uuid
      */
     @Column(name = "role_id")
+    @NotNull
     private Long roleId;
 
     /**
