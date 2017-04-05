@@ -17,6 +17,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
@@ -107,7 +108,13 @@ public class UserServiceImpl extends SimpleBaseService<UserMapper, User,Long> im
     @Override
     public Page<User> queryUsers(PageInfo<User> page, User user) {
         Example example = new Example(User.class);
-        example.createCriteria().andLike("userCode","%"+user.getUserCode()+"%");
+        Example.Criteria criteria = example.createCriteria();
+        if (StringUtils.hasText(user.getUserCode())) {
+            criteria.andLike("userCode", FormatUtils.sqlAllLike(user.getUserCode()));
+        }
+        if (!ObjectUtils.isEmpty(user.getUserState())) {
+            criteria.andEqualTo("userState", user.getUserState());
+        }
         return selectByExamplePage(example,page);
     }
 }

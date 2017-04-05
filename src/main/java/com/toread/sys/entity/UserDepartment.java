@@ -1,5 +1,6 @@
 package com.toread.sys.entity;
 
+import com.toread.sys.common.mybatis.annotation.CTime;
 import com.toread.sys.common.mybatis.annotation.IDSequence;
 
 import javax.persistence.Column;
@@ -32,6 +33,7 @@ public class UserDepartment {
      * 创建时间
      */
     @Column(name = "c_time")
+    @CTime
     private Date cTime;
 
     /**

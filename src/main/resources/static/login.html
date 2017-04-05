@@ -2,39 +2,58 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script src="//cdn.bootcss.com/jquery/1.11.1/jquery.js"></script>
+    <!-- 引入Vue -->
+    <script src="//vuejs.org/js/vue.min.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="//unpkg.com/iview/dist/styles/iview.css">
+    <!-- 引入组件库 -->
+    <script src="//unpkg.com/iview/dist/iview.min.js"></script>
     <title></title>
 </head>
 <body>
+
+<div id="app">
+    <i-select v-model="model1" style="width:200px">
+        <i-option v-for="item in cityList" :value="item.value" :key="item">{{ item.label }}</i-option>
+    </i-select>
+</div>
+
 <script>
-    $(function () {
-        $("#qq").click(function () {
-            console.info("测试")
-            $.ajax({
-                type: "POST",
-                url: "/user/login",
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify({
-                    userCode: 'chuanqi',
-                    userPwd: '123456'
-                }),
-                dataType: "json",
-                success: function (message) {
-                    console.info(message);
-                    if (message > 0) {
-                        alert("请求已提交！我们会尽快与您取得联系");
-                    }
+
+    var xx = new Vue({
+        el: '#app',
+        data: {
+            cityList: [
+                {
+                    value: 'beijing',
+                    label: '北京市'
                 },
-                error: function (message) {
-                    console.info(message);
-                    $("#request-process-patent").html("提交数据失败！");
+                {
+                    value: 'shanghai',
+                    label: '上海市'
+                },
+                {
+                    value: 'shenzhen',
+                    label: '深圳市'
+                },
+                {
+                    value: 'hangzhou',
+                    label: '杭州市'
+                },
+                {
+                    value: 'nanjing',
+                    label: '南京市'
+                },
+                {
+                    value: 'chongqing',
+                    label: '重庆市'
                 }
-            });
-        })
+            ],
+            model1: ''
+        }
     })
+    xx.model1 = 'chongqing';
 </script>
-<input type="button"
-       value="提交"
-       id="qq">
+
 </body>
 </html>

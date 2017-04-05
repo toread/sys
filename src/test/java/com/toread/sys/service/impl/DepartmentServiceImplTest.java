@@ -1,6 +1,7 @@
 package com.toread.sys.service.impl;
 
 import com.toread.sys.AccessCtlApplicationTests;
+import com.toread.sys.common.enums.State;
 import com.toread.sys.common.tree.Tree;
 import com.toread.sys.entity.Department;
 import com.toread.sys.service.IDepartmentService;
@@ -41,6 +42,7 @@ public class DepartmentServiceImplTest  extends AccessCtlApplicationTests {
         department.setDptPid(0L);
         department.setDptId(1L);
         department.setDptType("1");
+        department.setDptState(State.ENABLED.code());
         department.setDptName("市委");
 
         departmentService.insert(department);
@@ -48,17 +50,20 @@ public class DepartmentServiceImplTest  extends AccessCtlApplicationTests {
         child1.setDptPid(department.getDptId());
         child1.setDptType("1");
         child1.setDptName("办公室");
+        child1.setDptState(State.ENABLED.code());
         departmentService.insert(child1);
 
         child11 = new Department();
         child11.setDptType("2");
         child11.setDptPid(child1.getDptId());
         child11.setDptName("秘书组");
+        child11.setDptState(State.ENABLED.code());
         departmentService.insert(child11);
 
         child22 = new Department();
         child22.setDptPid(child11.getDptId());
         child22.setDptType("2");
+        child22.setDptState(State.ENABLED.code());
         child22.setDptName("监理秘书");
         departmentService.insert(child22);
     }
