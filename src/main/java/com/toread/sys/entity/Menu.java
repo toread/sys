@@ -1,13 +1,17 @@
 package com.toread.sys.entity;
 
+import com.toread.sys.common.mybatis.annotation.CTime;
 import com.toread.sys.common.mybatis.annotation.IDSequence;
+import com.toread.sys.common.mybatis.annotation.UTime;
 import com.toread.sys.common.tree.annotation.TreeId;
 import com.toread.sys.common.tree.annotation.TreePid;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.util.Date;
+import java.util.List;
 
 @Table(name = "sys_menu")
 public class Menu {
@@ -19,6 +23,12 @@ public class Menu {
     @IDSequence
     @TreeId
     private Long menuId;
+
+  /**
+   * 资源URL
+   */
+  @Column(name = "menu_url")
+  private Long menuUrl;
 
     /**
      * 菜单名字
@@ -55,15 +65,28 @@ public class Menu {
      * 创建时间
      */
     @Column(name = "menu_c_time")
+    @CTime
     private Date menuCTime;
 
     /**
      * 更新时间
      */
     @Column(name = "menu_u_time")
+    @UTime
     private Date menuUTime;
 
-    /**
+  @Transient
+  private List<Menu> children;
+
+  public List<Menu> getChildren() {
+    return children;
+  }
+
+  public void setChildren(List<Menu> children) {
+    this.children = children;
+  }
+
+  /**
      * 获取菜单主键
      *
      * @return menu_id - 菜单主键
@@ -206,4 +229,14 @@ public class Menu {
     public void setMenuUTime(Date menuUTime) {
         this.menuUTime = menuUTime;
     }
+
+
+  public Long getMenuUrl() {
+    return menuUrl;
+  }
+
+  public void setMenuUrl(Long menuUrl) {
+    this.menuUrl = menuUrl;
+  }
+
 }

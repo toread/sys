@@ -8,6 +8,7 @@
     <id column="menu_id" jdbcType="BIGINT" property="menuId" />
     <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
     <result column="menu_icon" jdbcType="VARCHAR" property="menuIcon" />
+    <result column="menu_url" jdbcType="VARCHAR" property="menuUrl"/>
     <result column="menu_pid" jdbcType="BIGINT" property="menuPid" />
     <result column="menu_state" jdbcType="VARCHAR" property="menuState" />
     <result column="menu_order" jdbcType="INTEGER" property="menuOrder" />

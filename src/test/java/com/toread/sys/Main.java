@@ -14,7 +14,7 @@ public class Main {
     public static void main(String[] args) {
         DateFormatter date = new DateFormatter("YYYY-MM-dd");
         Calendar calendar = Calendar.getInstance();
-        calendar.set(2017, 1, 0);
+        calendar.set(2017, 2, 0);
         for (int day = 0; day < 35; day++) {
             if (!(calendar.get(Calendar.DAY_OF_WEEK) == FRIDAY
                     || calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY

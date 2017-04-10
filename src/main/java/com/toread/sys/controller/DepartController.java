@@ -74,12 +74,12 @@ public class DepartController {
     }
 
     @RequestMapping(method = {RequestMethod.POST}, value = APIRout.DeptAPI.BIND_USER_DEPART)
-    public void bindUserDepart(UserDepartment userDepartment) {
+    public void bindUserDepart(@RequestBody UserDepartment userDepartment) {
         userDepartmentService.bindDepartment(userDepartment.getUserId(), Arrays.asList(userDepartment.getDptId()));
     }
 
     @RequestMapping(method = {RequestMethod.POST}, value = APIRout.DeptAPI.UN_BIND_USER_DEPART)
-    public void unBindUserDepart(UserDepartment userDepartment) {
+    public void unBindUserDepart(@RequestBody UserDepartment userDepartment) {
         userDepartmentService.bindDepartment(userDepartment.getUserId(), Arrays.asList(userDepartment.getDptId()));
     }
 }

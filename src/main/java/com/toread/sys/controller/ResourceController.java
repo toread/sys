@@ -54,12 +54,12 @@ public class ResourceController {
     }
 
     @RequestMapping(method = {RequestMethod.POST}, value = APIRout.ResourceAPI.BIND_ROLE_RESOURCE)
-    public void bindRoleResource(UserRole userRole) {
+    public void bindRoleResource(@RequestBody UserRole userRole) {
         userRoleService.bindRole(userRole);
     }
 
     @RequestMapping(method = {RequestMethod.POST}, value = APIRout.ResourceAPI.UN_BIND_ROLE_RESOURCE)
-    public void unBindRoleResource(UserRole userRole) {
+    public void unBindRoleResource(@RequestBody UserRole userRole) {
         userRoleService.unBindRole(userRole);
     }
 }

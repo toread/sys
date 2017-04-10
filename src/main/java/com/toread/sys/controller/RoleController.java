@@ -54,11 +54,11 @@ public class RoleController {
     }
 
     @RequestMapping(method = {RequestMethod.POST}, value = APIRout.RoleAPI.BIND_USER_ROLE)
-    public void bindUserRole(UserRole userRole) {
+    public void bindUserRole(@RequestBody UserRole userRole) {
         iUserRoleService.bindRole(userRole);
     }
 
-    public void unBindUserRole(UserRole userRole) {
+    public void unBindUserRole(@RequestBody UserRole userRole) {
         iUserRoleService.unBindRole(userRole);
     }
 }

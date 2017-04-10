@@ -52,4 +52,15 @@ public class APIRout {
     public static final String BIND_ROLE_RESOURCE = "/resource/bindRoleResource";       //查询资源
   }
 
+  /**
+   * 菜单模块
+   */
+  public static class MenuAPI {
+    public static final String ADD = "/menu/add";           //增加菜单
+    public static final String DELETE = "/menu/delete";     //删除菜单
+    public static final String UPDATE = "/menu/update";        //更新菜单
+    public static final String GET_CHILDES = "/menu/getChildes";    //获取子菜单
+  }
+
+
 }

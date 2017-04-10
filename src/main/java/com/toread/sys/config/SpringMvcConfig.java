@@ -12,6 +12,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.alibaba.fastjson.serializer.SerializerFeature.WriteNullListAsEmpty;
+
 /**
  * @author 黎志兵
  */
@@ -25,7 +27,9 @@ public class SpringMvcConfig extends WebMvcConfigurerAdapter {
         List<MediaType> support = new ArrayList<MediaType>();
         support.add(MediaType.APPLICATION_JSON);
         httpMessageConverter.setSupportedMediaTypes(support);
-        httpMessageConverter.getFastJsonConfig().setSerializerFeatures(SerializerFeature.WriteMapNullValue, SerializerFeature.SortField);
+        httpMessageConverter.getFastJsonConfig().setSerializerFeatures(SerializerFeature.WriteNullStringAsEmpty,
+                SerializerFeature.WriteMapNullValue, SerializerFeature.SortField,
+                SerializerFeature.DisableCircularReferenceDetect, WriteNullListAsEmpty);
         return httpMessageConverter;
     }
 
